@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Frank Meola | @Model.page.Title</title>
+    <link rel="stylesheet" href="@ResolveUrl("static/stylesheets/styles.css")">
+    <link rel="stylesheet" href="@ResolveUrl("static/stylesheets/pygment_trac.css")">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="@ResolveUrl("static/javascripts/respond.js")"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="@ResolveUrl("static/stylesheets/ie.css")">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+			<nav>
+				<li><a href="@ResolveUrl("index.html")">Home</a></li>
+				<li><a href="@ResolveUrl("blog/index.html")">Blog</a></li>
+			</nav>			
+		</div><!-- end header -->
+
+    <div class="wrapper">
+		<section>
+			@RenderBody()     
+		</section>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
