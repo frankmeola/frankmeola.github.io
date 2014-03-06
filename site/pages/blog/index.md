@@ -13,5 +13,5 @@ It's been {currentDate - lastEncounterDate} since we last spoke. How are you? I 
 
 ...
 
-[Keep Reading](2014-3-5.html)
+[Keep Reading](2014-3-5.html#disqus_thread)
 
