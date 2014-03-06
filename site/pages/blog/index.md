@@ -1,5 +1,5 @@
 <!--
-template = post
+template = page
 title = Blog
 -->
 
