@@ -1,52 +1,106 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Frank Meola">
+    <link rel="shortcut icon" href="static/images/favicon.ico">
+
     <title>Frank Meola | Home</title>
-    <link rel="stylesheet" href="static/stylesheets/styles.css">
-    <link rel="stylesheet" href="static/stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="static/javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
+
+	
+    <!-- Bootstrap core CSS -->
+    <link href="static/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="static/stylesheets/design.css" rel="stylesheet">
+	
+	<script src="static/javascripts/respond.js"></script>
+	<!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <!--[if lt IE 8]>
     <link rel="stylesheet" href="static/stylesheets/ie.css">
     <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+		
   </head>
   <body>
-      <div id="header">
-			<nav>
-				<li><a href="index.html">Home</a></li>
-				<li><a href="blog/index.html">Blog</a></li>
-				<li><a href="about_me.html">About</a></li>
-                <li><a href="contact_me.html">Contact</a></li>
-			</nav>			
-		</div><!-- end header -->
+	
+		<!-- NAV -->
+	<div class="bs-component">
+	  <div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="#"><img src="static/images/logo_grey_transparent_75_40.png" border="0" style="padding:0;margin:0;"/></a>
+		</div>
+		<div class="navbar-collapse collapse navbar-inverse-collapse">
+		  <ul class="nav navbar-nav">
+			<li><a href="index.html">Home</a></li>
+			<li><a href="blog/index.html">Blog</a></li>
+			<li><a href="about_me.html">About Me</a></li>
+			<li><a href="contact_me.html">Contact Me</a></li>
+		  </ul>
+		</div>
+	</div> 
 
-    <div class="wrapper">
-		<section>
-			
+	
 
 <!--
-template = page
+template = splash
 title = Home
 -->
 
-<h1>Welcome to my new site</h1>
-
-<p>Let's call this an experiment in MVP. In true iterative fashion I will be building this site out to host a blog and anything else that makes sense.</p>
-
-
-<br/><hr />
-     
-		</section>
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-1 col-lg-offset-1">
+                <h1>Create</h1>
+            </div>
+            <div class="col-lg-1 col-lg-offset-6">
+                <h1>Simple</h1>
+            </div>
+        </div>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+</div>  
+
+<div class="container" style="margin-top:-175px;">
+    <div class="row">
+        <div class="col-lg-3 col-lg-offset-4">
+            <img src="static/images/logo_blue_orange_circle_transparent.png" height="300px;" />
+        </div>
+    </div>
+</div>
+
+			
+    <!-- FOOTER -->
+<div class="container">
+	<footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+    </footer>
+</div>
+	
+	    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="static/javascripts/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-48719044-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	
 	<script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
@@ -59,16 +113,7 @@ title = Home
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
     </script>
+	
+	<!--[if !IE]><script>fixScale(document);</script><![endif]-->
   </body>
-  <script type="text/javascript">
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-48719044-1']);
-	  _gaq.push(['_trackPageview']);
-
-	  (function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-	</script>
 </html>
