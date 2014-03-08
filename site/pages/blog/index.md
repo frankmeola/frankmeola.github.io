@@ -3,29 +3,30 @@ template = page
 title = Blog
 -->
 
-<style>
-	.panel-body{
-		padding:2px;
-	}
-</style>
 <div class="container">
 	<div class="row">
-		<div class="col-lg-5">
+		<div class="col-sm-8 col-lg-5">
 			<div class="panel panel-default">
-			  <a href="2014-3-5-hello-world.html">
-			  <div class="panel-body" style="min-height:350px;">
-				<img src="../static/images/blog_media/hello_world_console.png" />
+			  <div class="panel-body">
+			    <a href="2014-3-5-hello-world.html">
+                              <div class="current-post-image">
+			        <img src="../static/images/blog_media/hello_world_console.png" width="100%" />
+                              </div>
+                            </a>
+                            <p>
+                              It's customary that a new blog developer is christened with a hello world post. This one is no different.
+                            </p>
 			  </div>
-			  </a>
 			  <div class="panel-footer">
-				<h4>Hello world on 3/5/2014 - <a href="2014-3-5-hello-world.html#disqus_thread">Comments</a></h4>
+                            <a href="2014-3-5-hello-world.html">
+				<h4>Hello world on 3/5/2014</h4>
+                            </a>
 			  </div>
 			</div>
 		</div>
-	</div>
-	<!--
-	<div class="row">
-	<div class="col-lg-3">
+	</div>	
+<!--	<div class="row">
+	<div class="col-sm-5 col-lg-3">
 		<div class="panel panel-default">
 		  <div class="panel-body" style="height:200px;">
 			Panel content
@@ -35,7 +36,7 @@ title = Blog
 		  </div>
 		</div>
 	</div>
-	<div class="col-lg-3">
+	<div class="col-sm-5 col-lg-3">
 		<div class="panel panel-default">
 		  <div class="panel-body" style="height:200px;">
 			Panel content
@@ -45,7 +46,7 @@ title = Blog
 		  </div>
 		</div>
 	</div>
-	<div class="col-lg-3">
+	<div class="col-sm-5 col-lg-3">
 		<div class="panel panel-default">
 		  <div class="panel-body" style="height:200px;">
 			Panel content
@@ -55,7 +56,7 @@ title = Blog
 		  </div>
 		</div>
 	</div>
-	<div class="col-lg-3">
+	<div class="col-sm-5 col-lg-3">
 		<div class="panel panel-default">
 		  <div class="panel-body" style="height:200px;">
 			Panel content
@@ -65,6 +66,5 @@ title = Blog
 		  </div>
 		</div>
 	</div>
-	</div>
-	-->
+	</div> -->
 <div>
