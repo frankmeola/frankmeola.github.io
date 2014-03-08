@@ -3,7 +3,13 @@ template = post
 title = Hello world
 -->
 
-# Hello world
+# __Hello world__
+
+<div class="row">
+	<div class="col-lg-3 col-lg-offset-3">
+		<img src="../static/images/blog_media/hello_world_console.png" />
+	</div>
+</div>
 
 Dear {yourName},
 
