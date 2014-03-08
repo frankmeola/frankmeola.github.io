@@ -1,10 +1,25 @@
 <!--
-template = page
+template = splash
 title = Home
 -->
 
-# Welcome to my new site
 
-Let's call this an experiment in MVP. In true iterative fashion I will be building this site out to host a blog and anything else that makes sense.
-
-
+<div class="jumbotron">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-1 col-lg-offset-1">
+				<h1>Create</h1>
+			</div>
+			<div class="col-lg-1 col-lg-offset-6">
+				<h1>Simple</h1>
+			</div>
+		</div>
+	</div>
+</div>	
+<div class="container" style="margin-top:-175px;">
+	<div class="row">
+		<div class="col-lg-3 col-lg-offset-4">
+			<img src="static/images/logo_blue_orange_circle_transparent.png" height="300px;" />
+		</div>
+	</div>
+</div>

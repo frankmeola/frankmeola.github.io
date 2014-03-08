@@ -1,0 +1,5 @@
+<!--
+template = splash
+title = Home
+-->
+
