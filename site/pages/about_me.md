@@ -5,7 +5,17 @@ title = About Me
 
 # About me
 
+---
+
 My name is Frank Meola. I am a full-stack professional software developer. I am a generalist with some specialization in web site and application programming, service oriented architecture (SOA), and Domain Driven Design (DDD).
+
+# Resume
+
+---
+
+[LinkedIn Profile](http://www.linkedin.com/pub/frank-meola/6/304/a26)
+
+[StackOverflow](http://careers.stackoverflow.com/frankmeola)
 
 # Skillsets
 
