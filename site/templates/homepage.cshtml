@@ -1,39 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Frank Meola | @Model.page.Title</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Frank Meola">
     <link rel="shortcut icon" href="@ResolveUrl("static/images/favicon.ico")">
-
-    <title>Frank Meola | @Model.page.Title</title>
-
 	
     <!-- Bootstrap core CSS -->
-    <link href="@ResolveUrl("static/stylesheets/bootstrap.min.css")" rel="stylesheet">
-    <link href="@ResolveUrl("static/stylesheets/design.css")" rel="stylesheet">
-	
-	<script src="@ResolveUrl("static/javascripts/respond.js")"></script>
-	<!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="@ResolveUrl("static/stylesheets/ie.css")">
-    <![endif]-->
-		
+    <link href="@ResolveUrl("static/stylesheets/bootstrap.min.css")" rel="stylesheet" >
+    <link href="@ResolveUrl("static/stylesheets/design.css")" rel="stylesheet" >
+
+    <script src="@ResolveUrl("static/javascripts/html5.js")"></script>
+    <script src="@ResolveUrl("static/javascripts/respond.js")"></script>
   </head>
   <body>
-	
-	@Include("navbar")
+    
+    @Include("navbar")
 
-	@RenderBody()
-			
+    @RenderBody()
+    
     @Include("footer")
-	
-	@Include("script_assets")
-	
-	<!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+    @Include("script_assets")
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
   </body>
 </html>
