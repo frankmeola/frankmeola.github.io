@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Frank Meola | Hello world</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Frank Meola">
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
+	
+    <!-- Bootstrap core CSS -->
+    <link href="../static/stylesheets/bootstrap.min.css" rel="stylesheet" >
+    <link href="../static/stylesheets/design.css" rel="stylesheet" >
+   
+    <script src="../static/javascripts/html5.js"></script>
+    <script src="../static/javascripts/respond.js"></script>
+		
+  </head>
+  <body>
+    
+    	<!-- NAV -->
+	<div class="bs-component">
+	  <div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="#"><img src="../static/images/logo_grey_transparent_75_40.png" border="0" style="padding:0;margin:0;"/></a>
+		</div>
+		<div class="navbar-collapse collapse navbar-inverse-collapse">
+		  <ul class="nav navbar-nav">
+			<li><a href="../index.html">Home</a></li>
+			<li><a href="../blog/index.html">Blog</a></li>
+			<li><a href="../about_me.html">About Me</a></li>
+			<li><a href="../contact_me.html">Contact Me</a></li>
+		  </ul>
+		</div>
+	</div> 
+
+	<div class="container">
+	
+
+<!--
+template = post
+title = Hello world
+-->
+
+<div class="well">
+     <div class="row">
+          <div class="col-lg-3 col-lg-offset-3">
+               <img src="../static/images/blog_media/FH11OCT_REMSED_01.JPG" />
+               <p>Image courtesy of <a href="http://www.familyhandyman.com/smart-homeowner/remove-water-sediment-with-a-whole-home-water-filter" target="blank">Family Handyman</a></p>
+          </div>
+     </div>
+</div>
+
+<h1><strong>Bypass line</strong></h1>
+
+<h2>Plumbing the depths of Quality of Service (QOS)</h2>
+
+<h3>Piece of cake</h3>
+
+<p>It all started with a simple task - replace the filter on a whole house water filter. The instructions were simple enough: shut off the water to the house at the main, turn the filter housing counter-clockwise, remove the old filter, insert the new filter, turn the filter housing clockwise, turn on the water at the main, done. If you haven't guessed already then I'll tell you. It did <strong>not</strong> go that well. Everything went well until the "remove old filter". The housing on the filter creaked and groaned and then stuck. No, stuck implies it would someday budge. The housing somehow fused itself to the filter in a bond unknown to modern science. Oh well, maybe we don't need a new water filter. The old one isn't <em>that</em> dirty. Maybe we can just leave it and get sub-obtimal but somehwat filtered water. Now it gets interesting. Turning the water main back on and pssssshhhhhh a leak between the filter top and the housing. Shutting off the water main relieves the immediate urgency but now I am in hot errr cold water. </p>
+
+<h3>Operating under pressure</h3>
+
+<p>If this doesn't sound familiar let me convert it to the software world. I went to implement a relatively simple change in production. It had been two years since the last release and it was all manual steps but at least I had documentation for it. Something went wrong during the maintenance window and now the production server is broken. The customers aren't happy because service is down and business is not happy because they lose money when service is down. The pressure to fix things at this point is what can lead to hacks and duct tape or worse. The same optimism that let us assume would could build something is played against us when it fails. Few people liking being under this type of pressure but designing for anything but the happy path costs money and take more time. The problem is things fail. The more complex the system the more amazing ways it will find to fail. Good plumbers and engineers design for this and so can developers.</p>
+
+<h3>Happiness is running water</h3>
+
+<p>Let make this more concrete. You are deploying a voice chat server. People talk at their computers and your server manages to take the audio from one computer and pass it to another so someone can listen to your golden voice. Your server also does some cool things like in an audio processor that applies effects and runs filters on the audio to clean it up. Aren't you clever. Only you assumed the audio processor would always work. Your amazing algorithms could never have an issue and the sun will always shine on your server. Nope. Let's see what happens when your audio processor goes out to lunch.</p>
+
+<p><img src="../static/images/blog_media/ByPassValve_NoBypass.gif" style="display:block;margin-left:auto;margin-right:auto;"/></p>
+
+<p style="text-align:center;">Service outage when issue occurs</p>
+
+<p>Here's the play by play:</p>
+
+<ul>
+<li>Some voice data goes through your server. It gets enhanced just like you designed it. Did I mention how clever you are?</li>
+<li>The audio processor breaks (turns red).</li>
+<li>Your voice chat room goes silent. Users look around; blink twice; then they go off for a soda as the audio of their laughter fall silently to the floor.</li>
+<li>The operations team yells at you for not being as clever as they want you to be.  </li>
+</ul>
+
+<p>Now let's imagine you had this happen in production and after operations yelled at you (hey, it's a feedback loop right?) you asked the business owner what he though was a reasonable thing to do when the audio processor fails. Not what to do <strong>if</strong> it fails but what to do <strong>when</strong> it fails. After a rousing discussion about cost and ROI you settle on simply acting as a dumb pipe. Ok, not completely dumb. You level the audio so no one gets their ears blown out when someone drops their laptop during the chat but compared to the audio processor it is pretty dumb. Bomb-proof would be a good word for it. Anyway, after some more tweaking the system can now detect that the audio processor is having problems and routes incoming audio to the bomb-proof dump pipe.</p>
+
+<p><img src="../static/images/blog_media/ByPassValve.gif" style="display:block;margin-left:auto;margin-right:auto;"/></p>
+
+<p style="text-align:center;">Reduced quality of service when issue occurs</p>
+
+<p>Let's see how your voice chat is fairing:</p>
+
+<ul>
+<li>Some voice data goes through your server. It gets enhanced just like you designed it. Yes, you are a genius. &#42;cough&#42; &#42;self-esteem issues&#42; &#42;cough&#42;</li>
+<li>The audio processor breaks (turns red).</li>
+<li>Your voice chat users barely notice the interuption. Bob is slightly perplexed as to why he doesn't sound like Darth Vader in the chat anymore but everyone else is happy about it.</li>
+<li>You and operations work out the issue (service restart something or other).</li>
+<li>Everyone groans as Bob once again sounds like Darth Vader.</li>
+<li>The business owner showers you and operations with praise for doing such an amazing job handling that failure.</li>
+</ul>
+
+<h3>Lessons learned</h3>
+
+<p>I learned some valuable lessons from my water filter fiasco. </p>
+
+<ul>
+<li><p>Releasing early and often could have mitigated this whole scenario. Replacing the water filter every six months instead of every two years would have surfaced the early warning signs of impending failure and might have prevented a catastrophic failure. </p></li>
+<li><p>Having an option to bypass the problem while maintaining some service would prevent extra inspenses incurred from urgent fixes and reduce reactive short term decisions.</p></li>
+<li><p>At the end of the day everyone wants to be happy. Customer want to user your service, the business wants happy customers, and you want painless releases. </p></li>
+</ul>
+
+<p>Planning for failure in a complex system is a must. </p>
+
+<p>Things will fail at the worst moment. </p>
+
+<p>Be prepared and be the hero.</p>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Further resources</h3>
+  </div>
+  <div class="panel-body">
+       <p>The <a href="http://martinfowler.com/bliki/CircuitBreaker.html" target="blank">Circuit Breaker Pattern</a> would be helpful in implementing failure detection. The book <a href="http://www.amazon.com/gp/product/0978739213" target="blank">Release It!</a> goes into more detail about system failure. I credit <a href="http://www.familyhandyman.com/" target="blank">Family Handyman</a> with getting me through the plumbing issue and showing me how simple a bypass line is in practice. The bypass line looks eerily similar to the enterprise integration pattern called <a href="http://www.enterpriseintegrationpatterns.com/Detour.html" target="blank">Detour</a>. Must be a coincidence.
+       </p>
+  </div>
+</div>
+
+
+<br/><hr />
+<div id="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function() {
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+     
+	</div>
+			
+    <!-- FOOTER -->
+<div class="container">
+	<footer>
+        <p class="pull-left">&copy; 2014 Frank Meola</p>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+    </footer>
+</div>
+    
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../static/javascripts/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-48719044-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	
+	<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    <script>
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+           var msViewportStyle = document.createElement('style')
+           msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'))
+           document.querySelector('head').appendChild(msViewportStyle)
+        }
+    </script>
+
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+  </body>
+</html>
