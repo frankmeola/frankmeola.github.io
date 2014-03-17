@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Frank Meola | Data Rascals: Contiguous Data</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Frank Meola">
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
+	
+    <!-- Bootstrap core CSS -->
+    <link href="../static/stylesheets/bootstrap.min.css" rel="stylesheet" >
+    <link href="../static/stylesheets/design.css" rel="stylesheet" >
+   
+    <script src="../static/javascripts/html5.js"></script>
+    <script src="../static/javascripts/respond.js"></script>
+		
+  </head>
+  <body>
+    
+    	<!-- NAV -->
+	<div class="bs-component">
+	  <div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="/"><img src="../static/images/logo_grey_transparent_75_40.png" border="0" style="padding:0;margin:0;"/></a>
+		</div>
+		<div class="navbar-collapse collapse navbar-inverse-collapse">
+		  <ul class="nav navbar-nav">
+			<li><a href="../index.html">Home</a></li>
+			<li><a href="../blog/index.html">Blog</a></li>
+			<li><a href="../about_me.html">About Me</a></li>
+			<li><a href="../contact_me.html">Contact Me</a></li>
+		  </ul>
+		</div>
+	</div> 
+
+	<div class="container">
+	
+
+<!--
+template = post
+title = Data Rascals: Contiguous Data
+-->
+
+<div class="well">
+     <div class="row">
+            <div class="col-lg-3 col-lg-offset-3">
+                     <img src="../static/images/blog_media/data_rascal.png" />
+            </div>
+        </div>
+</div>
+
+<h1><strong>Data Rascals: Contiguous Data</strong></h1>
+
+<div class="post-tag-line">
+     <span class="label label-primary">Data structures</span>, <span class="label label-primary">LINQ</span>
+</div>
+
+<h2>A glitch in the matrix</h2>
+
+<p>Let's start with a hypothetical situation. You work as a developer for a cell phone company. They would like to show the plan discounts available on their website. The discounts are based on the level of service you pick when you sign up. </p>
+
+<p>The data looks something like this:</p>
+
+<pre><code>var tiers = new List&lt;UsageTier&gt;{
+    new UsageTier{ Minutes = 100, Discount = 0.0m},
+    new UsageTier{ Minutes = 200, Discount = 0.05m},
+    new UsageTier{ Minutes = 300, Discount = 0.1m},
+    new UsageTier{ Minutes = 400, Discount = 0.2m},
+    new UsageTier{ Minutes = 500, Discount = 0.3m},
+    new UsageTier{ Minutes = 600, Discount = 0.5m},
+    new UsageTier{ Minutes = 700, Discount = 0.5m},
+    new UsageTier{ Minutes = 800, Discount = 0.5m}
+};
+</code></pre>
+
+<p>That's when you notice something strange. Is that a glitch in the matrix? Nope. There seems to be a maximum discount but instead of stopping they just keep adding tiers. When you ask the business owner how they want to convey this information to the user they gently explain that they only want to show up to the maximum discount. As per the business owner the maximum discount will always be 0.5 or 50%. Then they explain that some plans don't reach 50% and you should show them all. Unfortunately we can't change how business is using this data structure so we will have to write some code to support their usage.</p>
+
+<h2>A first shot at the problem</h2>
+
+<p>So let's try and solve this in the simplest way possible.</p>
+
+<pre><code>var trimmedTiers = new List&lt;UsageTier&gt;();
+
+for (var tierCounter = 0; tierCounter &lt; tiers.Count; tierCounter++ )
+{
+    if(0.5m == tiers[tierCounter].Discount)
+    {
+        trimmedTiers.Add(tiers[tierCounter]);
+        break;
+    }
+    trimmedTiers.Add(tiers[tierCounter]);
+}
+
+//Outputting trimmedTiers would show
+new UsageTier{ Minutes = 100, Discount = 0.0m},
+new UsageTier{ Minutes = 200, Discount = 0.05m},
+new UsageTier{ Minutes = 300, Discount = 0.1m},
+new UsageTier{ Minutes = 400, Discount = 0.2m},
+new UsageTier{ Minutes = 500, Discount = 0.3m},
+new UsageTier{ Minutes = 600, Discount = 0.5m}
+</code></pre>
+
+<p>Great so we loop through the tiers adding it to a new list. If we hit our maximum then we add it to the new list and stop there. Seems simple enough. But it never ends there does it?</p>
+
+<h2>General Problem and Sergeant Reuse</h2>
+
+<p>Let's step back and look at the problem again. We have a list of data with a specific order. The tiers are lined up one after the other. We are trying to grab a certain subset of those tiers. This sounds like a general problem that might have already been solved. Hmm. Let's see if we can prove our fifth grade teachers correct when they said we would need what they were teaching someday.</p>
+
+<p>First lets line up the items end to end:</p>
+
+<p><img src="../static/images/blog_media/tiers_horizontal.png" alt="Horizontal Tiers" /></p>
+
+<p>If my memory serves me correctly we can work with items lined up and adjacent. If you squint hard enugh it started to look like one of these:</p>
+
+<p><img src="../static/images/blog_media/number_line.png" alt="Number Line" /></p>
+
+<p>Number line courtesy of <a href="http://www.mathsisfun.com/number-line.html">http://www.mathsisfun.com/number-line.html</a></p>
+
+<p>It's an object line instead of a number line but I bet we can still select a <strong>range</strong> of them. </p>
+
+<p>First lets start with a simple example to see if this would work.</p>
+
+<pre><code>//create a number line from -10 to 10
+var numbers = new List&lt;int&gt;();
+for(var i = -10; i &lt;= 10; i++)
+{
+    numbers.Add(i);
+}
+
+var numberRange = numbers.SelectRange(leftBound =&gt; leftBound == -5, rightBound =&gt; rightBound == 5).ToList();
+
+//outputting numberRange would give us
+"-5,-4,-3,-2,-1,0,1,2,3,4,5"
+</code></pre>
+
+<p>That works. Our code is pretty explicit and tells us what we want to do without telling us how. Here is how the implementation works:</p>
+
+<script src="https://gist.github.com/frankmeola/9592960.js"></script>
+
+<p>Under the nice syntax of SelectRange we see the SkipUntil and TakeUntil methods. This breaks the work down for finding the left bound and the right bound of the range. These methods can be used individually to give the developer more freedom in expressing their range and the SelectRange method wraps them up for the more straight-forward use cases. </p>
+
+<h3>Usage tier discounts</h3>
+
+<p>So right now it looks like I went of into re-usable code land but I still haven't shown that this is the solution to our problem. Lets take a look at using this for the cell phone usage tier problem:</p>
+
+<pre><code>var tiers = new List&lt;UsageTier&gt;{
+    new UsageTier{ Minutes = 100, Discount = 0.0m},
+    new UsageTier{ Minutes = 200, Discount = 0.05m},
+    new UsageTier{ Minutes = 300, Discount = 0.1m},
+    new UsageTier{ Minutes = 400, Discount = 0.2m},
+    new UsageTier{ Minutes = 500, Discount = 0.3m},
+    new UsageTier{ Minutes = 600, Discount = 0.5m},
+    new UsageTier{ Minutes = 700, Discount = 0.5m},
+    new UsageTier{ Minutes = 800, Discount = 0.5m}
+};
+
+var trimmedTiers = tiers.TakeUntil(tier =&gt; 0.5m == tier.Discount).ToList();
+
+//Outputting trimmedTiers would show
+new UsageTier{ Minutes = 100, Discount = 0.0m},
+new UsageTier{ Minutes = 200, Discount = 0.05m},
+new UsageTier{ Minutes = 300, Discount = 0.1m},
+new UsageTier{ Minutes = 400, Discount = 0.2m},
+new UsageTier{ Minutes = 500, Discount = 0.3m},
+new UsageTier{ Minutes = 600, Discount = 0.5m}
+</code></pre>
+
+<p>Ok, so it solves our problem with one line of more re-usable code. We don't need all the range semantics to solve the problem for our business so we can skip the rest of the range stuff and just use TakeUntil. But since we have them let's see what we can do with them to solve other interesting range questions.</p>
+
+<h3>Text selection</h3>
+
+<p>If you're working with text then Regular Expressions are great. But let's see what happens when we use ranges to find simple patterns in text.</p>
+
+<pre><code>var words = "Sometimes I am only interested in a certain phrase. Sometimes I used regular expressions. Other times I like innefficient approaches. Some days you win and some days you lose. Never underestimate simple approaches to problems."
+                        .Replace(".", "")
+                        .Split(new char[] { ' ' });
+
+var phraseWords = words
+                    .SkipUntilExlusive(s =&gt; s == "like").TakeUntil(s =&gt; s == "approaches")
+                    .ToList();
+
+//outputting string.Join(" ", phraseWords.ToArray())
+"innefficient approaches"
+</code></pre>
+
+<p>That worked pretty well but it only found the first instance of "like*approaches". Now how about selecting all instances of a range in some text:</p>
+
+<pre><code>var sentences = "Sometimes I am only interested in a certain phrase. Sometimes I used regular expressions. Other times I like innefficient approaches. Some days you win and some days you lose. Never underestimate people who like simple approaches to problems."
+                        .Split(new char[] { '.' });
+
+var phraseWords = sentences.Select(sentence =&gt;
+                                                    string.Join(" ", sentence
+                                                                        .Split(new char[] { ' ' })
+                                                                        .SkipUntilExlusive(s =&gt; s == "like")
+                                                                        .TakeUntil(s =&gt; s == "approaches")
+                                                                        .ToArray())                                                                    
+                )
+                .Where(text =&gt; !string.IsNullOrWhiteSpace(text))
+                .ToList();
+
+
+//phraseWords[0] - "innefficient approaches"
+//phraseWords[1] - "simple approaches"
+</code></pre>
+
+<p>That seems pretty straightforward. I'm not sure I would use this to search massive documents but it does look like it would fit into a map stage of map/reduce pretty well. </p>
+
+<h3>Date range selection</h3>
+
+<pre><code>//a calendar is just a list of sequential dates right? :-)
+var marchCalendar = new List&lt;DateTime&gt;();
+for (var i = 1; i &lt;= 31; i++) marchCalendar.Add(new DateTime(2014, 3, i));
+
+var conventionDates = marchCalendar
+                        .SelectRange(start =&gt; start.Day == 5, end =&gt; end.DayOfWeek == DayOfWeek.Saturday)
+                        .ToList();
+
+//outputting conventionDates would give us
+new DateTime(2014, 3, 5), new DateTime(2014, 3, 6), new DateTime(2014, 3, 7), new DateTime(2014, 3, 8)
+</code></pre>
+
+<p>That's pretty fun. You could start to ask the calendar all sorts of questions. How many hours from now until your next vacation day springs to mind.</p>
+
+<h2>The right bound</h2>
+
+<p>So where does all this leave us? Well, we solved the business problem first and implemented the bare minimum necessary to do so in the TakeUntil method. The rest of it was just riffing on the ideas triggered by the initial problem. Performance-wise our solution is pretty CPU heavy and looks pretty inefficient on larger lists as it has to traverse the entire list testing each element. The good news is that because we are using IEnumerable and yield return the memory footprint is light and we don't have to keep the entire list in memory in order to process it. That means we can entertain processing large lists in parallel or stream infinite lists to find multiple instances. </p>
+
+<p>Hopefully this is as useful for you as it was for me. It was a fun thought experiment with practical applications. After all, many things in life can be thought of as sequential lists. Each second of the day has a predecessor and successor that makes up the infinite stream of existence. Each second taking it's place next to the previous one in an inexorable march towards infinity. </p>
+
+<pre><code>secondsInLife.Select(moment =&gt;
+                                moment.SelectRange(start =&gt; start.Feeling &gt;= "Happiness", end =&gt; end.Feeling &lt; "Happiness")
+                                .ToList()
+                    ).ToList();
+
+//outputs all the happy moments in you life. 
+//...hopefully not an empty list.
+</code></pre>
+
+<p><img src="../static/images/blog_media/keano_whoa.jpg" alt="Whoa" /></p>
+
+<p><br/></p>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Further resources</h3>
+  </div>
+  <div class="panel-body">
+      <p>
+        The code for SelectRange and TakeUntil can be <a href="https://gist.github.com/frankmeola/9592960">found here</a>.
+      </p>
+  </div>
+</div>
+
+
+<br/><hr />
+<div id="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function() {
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+     
+	</div>
+			
+    <!-- FOOTER -->
+<div class="container">
+    <footer>
+        <p style="text-align:center;">Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way.</p>
+        <p class="pull-left">&copy; 2014 Frank Meola</p>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+    </footer>
+</div>
+    
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../static/javascripts/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-48719044-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	
+	<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    <script>
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+           var msViewportStyle = document.createElement('style')
+           msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'))
+           document.querySelector('head').appendChild(msViewportStyle)
+        }
+    </script>
+
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+  </body>
+</html>
