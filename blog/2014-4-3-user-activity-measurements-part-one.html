@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Frank Meola | User activity measurements</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Frank Meola">
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
+	
+    <!-- Bootstrap core CSS -->
+    <link href="../static/stylesheets/bootstrap.min.css" rel="stylesheet" >
+    <link href="../static/stylesheets/design.css" rel="stylesheet" >
+   
+    <script src="../static/javascripts/html5.js"></script>
+    <script src="../static/javascripts/respond.js"></script>
+		
+  </head>
+  <body>
+    
+    	<!-- NAV -->
+	<div class="bs-component">
+	  <div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="/"><img src="../static/images/logo_grey_transparent_75_40.png" border="0" style="padding:0;margin:0;"/></a>
+		</div>
+		<div class="navbar-collapse collapse navbar-inverse-collapse">
+		  <ul class="nav navbar-nav">
+			<li><a href="../index.html">Home</a></li>
+			<li><a href="../blog/index.html">Blog</a></li>
+			<li><a href="../about_me.html">About Me</a></li>
+			<li><a href="../contact_me.html">Contact Me</a></li>
+		  </ul>
+		</div>
+	</div> 
+
+	<div class="container">
+	
+
+<!--
+template = post
+title = User activity measurements
+-->
+
+<div class="well">
+     <div class="row">
+            <div class="col-lg-3 col-lg-offset-3">
+                     <img src="../static/images/blog_media/untied_shoelace.jpg" />
+                             <p>Image courtesy of <a href="https://www.flickr.com/photos/theredjoke/30514199/" target="blank">Just Chiaratti</a></p>
+            </div>
+        </div>
+</div>
+
+<h1>User activity measurements - Part One</h1>
+
+<div class="post-tag-line">
+     <span class="label label-primary">Lean</span>, <span class="label label-primary">Feedback</span>, <span class="label label-primary">Metaphor</span>
+</div>
+
+<h2>Feedback where it matters - Production</h2>
+
+<p>I am a big fan of closing feedback loops. Doing business with open feedback loops just feels like running around with untied shoes and being oblivious as to what is causing you to continue to fall on your face. There are plenty of feedback loops in development and there is much effort expended on closing and optimizing them. Compilers, automated tests, and code metrics are a few examples of most developer's favorite feedback loops. But if we step back and look at the applications we are building from a broader perspective we can see that a feedback loop that might get neglected is how our application is used in production.</p>
+
+<h2>Optimizing for the real world</h2>
+
+<p>The dirty secret of software development is that people use the systems we build. Yuck. Our gleamingly shiny and perfectly logical and organized system interfacing with a fleshy pink human? What kind of sadistic person thought this would be a good idea? The horror. At least that's the impression I get from some developers. But it's not a slam on developers it's just a condition that occurs when complex systems are built with open feedback loops. Let's look to the automotive industry for an example. </p>
+
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    <h3 class="panel-title">Danger!</h3>
+  </div>
+  <div class="panel-body">
+    Fictional oversimplification ahead. You have been warned.
+  </div>
+</div>
+
+<h3>Lab Tests</h3>
+
+<p>You work as an engineer for the Swedish Fjord car company. You and your team of crack mechanical engineers are tasked with building the suspension system for a new SUV. You design and calculate and build. You hook the suspension up to a dummy car chassis in the lab and bounce the chassis up and down. You learn some things about O-rings and hydraulic pressure and take that new information back to re-design and re-calculate and re-build. You repeat until the O-rings stop leaking and the hydraulic pressure stabilizes. Well done, high fives and pizzas all around.</p>
+
+<h3>Test Track</h3>
+
+<p>After your successes you bolt the suspension onto the rest of the prototype model and have the test driver take a few laps around the test track. The test driver eases into the rigorous test first making sure nothing explodes when he turns the key. With each passing test the driver's confidence increases. Pretty soon they are running through the test track so fast and so smoothly that the test driver is hooting and hollering as the tires squeal. </p>
+
+<h3>Ship It!</h3>
+
+<p>With such great results on the test track you start production on the car and customers start placing orders thanks to your amazing marketing. Your engineers have all moved onto other projects since their work is done for this model. Then the complaints start pouring in to the support engineers. Tip-overs, inability to stop, and other nightmarish events are occurring with your brand new SUV. Amid the maelstrom the support engineering team digs into the details and finds out what happened. The suspension was never designed to handle the real world usage. It turns out that the real world has roads that are bumpy, full of potholes, and slippery spots that cause less than optimal results when trying to stop, turn or avoid a bicyclist. </p>
+
+<h3>It Must Be Laziness</h3>
+
+<p>If you are blaming the engineers for a less than rigorous test process or the company for not investing in quality then you're missing the important bit.</p>
+
+<p>Let </p>
+
+<p>me</p>
+
+<p>slow</p>
+
+<p>down</p>
+
+<p>and </p>
+
+<p>say</p>
+
+<p>...</p>
+
+<p><strong>the lab is not the real world.</strong></p>
+
+<h2>Well Mr. Smarty Pants, Where Do We Go From Here?</h2>
+
+<p>There are many differences between automotive engineering and software engineering. I'll save the discussions on accountability, consequences of failure, and the fault investigation and findings reports which the software industry lacks at the moment for another day. Unfortunately in software it's all too common that the original engineers are off on a new project and have no idea what happened and what the impact of their decisions were that causes nightmares for the customers, business, and the support engineers. Many times mistakes continue to be made and history repeats itself leaving a wake of semi-useless systems and legacy applications.</p>
+
+<p>Therein lies the problem and the solution - closing the feedback loop between the designers and builders and the real world. </p>
+
+<p>We have a couple of options for closing the loop though. We can make our lab and test track as realistic as the real world. With enough money and time we could simulate darn near every possibility and potentially add a bit of the random chaos that the real world seems so full of. Another option is to extend our lab into the real world. This isn't a plea to let me code in production and remove all the quality checks and discipline...although...no that's not it. It's more of a shift in viewpoint. Instead of looking at the release of software as a thrown over the wall and walk away task we need to look at it as the start of getting more feedback about our software. The code is compiled, unit tested, integration tested, performance tested, acceptance tested and all manner of tested and then we add the happy mess that is people into the mix and walk away? Hmmm, must be selective logic on the developers' part.</p>
+
+<p>All of this sets that stage for some ideas I have rattling around that I would like to explore. Tune in next time for a ground breaking discovery. Or another jQuery plugin. It's like 50-50 at this point.</p>
+
+
+<br/><hr />
+<div id="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function() {
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+     
+	</div>
+			
+    <!-- FOOTER -->
+<div class="container">
+    <footer>
+        <p style="text-align:center;">Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way.</p>
+        <p class="pull-left">&copy; 2014 Frank Meola</p>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+    </footer>
+</div>
+    
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../static/javascripts/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-48719044-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	
+	<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    <script>
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+           var msViewportStyle = document.createElement('style')
+           msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'))
+           document.querySelector('head').appendChild(msViewportStyle)
+        }
+    </script>
+
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+  </body>
+</html>
