@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Frank Meola | Sculpt Your Code in a REPL - Part One</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Frank Meola">
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
+	
+    <!-- Bootstrap core CSS -->
+    <link href="../static/stylesheets/bootstrap.min.css" rel="stylesheet" >
+    <link href="../static/stylesheets/design.css" rel="stylesheet" >
+   
+    <script src="../static/javascripts/html5.js"></script>
+    <script src="../static/javascripts/respond.js"></script>
+		
+  </head>
+  <body>
+    
+    	<!-- NAV -->
+	<div class="bs-component">
+	  <div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="/"><img src="../static/images/logo_grey_transparent_75_40.png" border="0" style="padding:0;margin:0;"/></a>
+		</div>
+		<div class="navbar-collapse collapse navbar-inverse-collapse">
+		  <ul class="nav navbar-nav">
+			<li><a href="../index.html">Home</a></li>
+			<li><a href="../blog/index.html">Blog</a></li>
+			<li><a href="../about_me.html">About Me</a></li>
+			<li><a href="../contact_me.html">Contact Me</a></li>
+		  </ul>
+		</div>
+	</div> 
+
+	<div class="container">
+	
+
+<!--
+template = post
+title = Sculpt Your Code in a REPL - Part One
+summary = REPLs are great and F# is a concise expressive language. Let's see if we can use each to make the other better.
+-->
+
+<div class="well">
+     <div class="row">
+          <div class="col-lg-3 col-lg-offset-3">
+               <img src="../static/images/blog_media/potters_wheel.jpg" width="300px" />
+<br/>
+Photo courtesy of <a href="https://www.flickr.com/photos/waltstoneburner/5745387762/">https://www.flickr.com/photos/waltstoneburner/5745387762/</a>
+          </div> 
+     </div>
+</div>
+
+<h1><strong>Sculpt Your Code In a REPL - Part One</strong></h1>
+
+<div class="post-tag-line">
+     <span class="label label-primary">REPL</span>, <span class="label label-primary">F#</span>, <span class="label label-primary">TDD</span>
+</div>
+
+<h2>Do what in a what?</h2>
+
+<p>You can use a REPL to sculpt your code. A <a href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> is a read-eval-print-loop. REPLs exist in all sorts of places and many programming languages have them. The most well known REPL is probably the JavaScript console in Firebug which inspired the JavaScript Console in FireFox and Chrome. The ability to quickly test out bits of code in a "live" environment was one of the major advancements in web development with JavaScript. You have probably used a REPL with dynamic languages like Python and Ruby but even statically typed languages have REPLs now-a-days like the one that ships with F# <a href="http://msdn.microsoft.com/en-us/library/dd233175.aspx">here</a> and the open source C# based REPL called <a href="http://scriptcs.net/">scriptcs</a>. I would even go as far as calling <a href="http://www.linqpad.net/">LinqPad</a> REPL-esque.</p>
+
+<h2>Why would I want to use <strong>that</strong> thing?</h2>
+
+<p>Developing in a REPL is like developing in a different world. The immediate execution it offers lets you interact with your code much quicker than a traditional compile-configure-run-click-look-loop (aka CCRCLL). With CCRCLL you are at the mercy of whatever UI is covering your code. The UI generally tends to limit your interactions with the code to certain well worn paths. In the REPL you are interacting with your abstractions directly. Create a stopwatch abstraction and start the timer a tickin'. Create a web-scraper and get a scrapin'. Create a &lt;noun&gt; and start a &lt;verbin&gt;'. This feedback loop of creating a thing and immediately trying it out is powerful. (&#42;cough&#42; TDD &#42;cough&#42;)</p>
+
+<p>I like working in a REPL for certain tasks especially when I am experimenting and trying out different approached to a problem. But it's no silver bullet. By itself the REPL is a tool. It's the potters wheel that turns your clay. Much like the potters wheel it doesn't shape the clay for you but simply provides an environmment or platform from which you do the sculpting.</p>
+
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    <h3 class="panel-title">Pretentiousness alarm triggered. Whoop. Whoop.</h3>
+  </div>
+  <div class="panel-body">
+       Whoa whoa. Whoa. I know what your thinking. The portrait of a developer as a young artist is a bit clich&eacute;d and has been beaten to death. But it's my metaphor and I have to find a way to apply all those art classes I took so I am going to use it.
+  </div>
+</div>
+
+<h2>Formed by feedback</h2>
+
+<p>Much like the clay pot being formed by the pressure applied by your fingers we need something to apply pressure to our digital creations. Since the magic is happening on the other side of the glass we need a stand-in that can interact with the abtraction directly. You could use a unit test framework but that is too formal for the type of experimenting I like to do in the REPL. Wait. Experimenting is how I would describe the interaction there. Let's see if that checks out.</p>
+
+<ul>
+<li>A basic premise or hypothesis that I want to prove out? Check. </li>
+<li>Some example cases that define what a successful result would be? Check.</li>
+<li>A scholarly peer review system that ensure the proper biases are applied? Err...Nope.</li>
+</ul>
+
+<p>Seems to check out. </p>
+
+<h2>To the Code!</h2>
+
+<p>Just kidding. First a little homework. Go play with a REPL - JavaScript, Python, C#, whatever. Then think about what you would build to experiment with code. What would give you the feedback you want? How simple would you make it? How complex? What would the API look like?</p>
+
+<p>Give it some thought and in my next post I will show you what I came up. Happy designing!</p>
+
+
+<br/><hr />
+<div id="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function() {
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+     
+	</div>
+			
+    <!-- FOOTER -->
+<div class="container">
+    <footer>
+        <p style="text-align:center;">Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way.</p>
+        <p class="pull-left">&copy; 2014 Frank Meola</p>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+    </footer>
+</div>
+    
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../static/javascripts/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-48719044-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	
+	<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    <script>
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+           var msViewportStyle = document.createElement('style')
+           msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'))
+           document.querySelector('head').appendChild(msViewportStyle)
+        }
+    </script>
+
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+  </body>
+</html>
