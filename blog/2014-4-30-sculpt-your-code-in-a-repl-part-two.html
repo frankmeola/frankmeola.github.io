@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Frank Meola | Sculpt Your Code in a REPL - Part Two</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Frank Meola">
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
+	
+    <!-- Bootstrap core CSS -->
+    <link href="../static/stylesheets/bootstrap.min.css" rel="stylesheet" >
+    <link href="../static/stylesheets/design.css" rel="stylesheet" >
+   
+    <script src="../static/javascripts/html5.js"></script>
+    <script src="../static/javascripts/respond.js"></script>
+		
+  </head>
+  <body>
+    
+    	<!-- NAV -->
+	<div class="bs-component">
+	  <div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="/"><img src="../static/images/logo_grey_transparent_75_40.png" border="0" style="padding:0;margin:0;"/></a>
+		</div>
+		<div class="navbar-collapse collapse navbar-inverse-collapse">
+		  <ul class="nav navbar-nav">
+			<li><a href="../index.html">Home</a></li>
+			<li><a href="../blog/index.html">Blog</a></li>
+			<li><a href="../about_me.html">About Me</a></li>
+			<li><a href="../contact_me.html">Contact Me</a></li>
+		  </ul>
+		</div>
+	</div> 
+
+	<div class="container">
+	
+
+<!--
+template = post
+title = Sculpt Your Code in a REPL - Part Two
+summary = Pencils down. Let's compare notes and see what a REPL-friendly experiment api would look like.
+-->
+
+<div class="well">
+     <div class="row">
+          <div class="col-lg-3 col-lg-offset-3">
+               <img src="../static/images/blog_media/potters_wheel.jpg" width="300px" />
+               <br/>
+               Photo courtesy of <a href="https://www.flickr.com/photos/waltstoneburner/5745387762/">https://www.flickr.com/photos/waltstoneburner/5745387762/</a>
+          </div> 
+     </div>
+</div>
+
+<h1><strong>Sculpt Your Code In a REPL - Part Two</strong></h1>
+
+<div class="post-tag-line">
+     <span class="label label-primary">REPL</span>, <span class="label label-primary">F#</span>, <span class="label label-primary">TDD</span>
+</div>
+
+<h2>Welcome back</h2>
+
+<p>In the <a href="2014-4-28-sculpt-your-code-in-a-repl-part-one.html">last post</a> we meandered down the REPL path and wound up wanting to create something that would encourage experimentating with code in a REPL and providing us with feedback so we ended up with sculpted code and not a lump of clay.</p>
+
+<p>Hopefully you had some time to think about how you would solve the problem. I had fun coming up with my solution but it's just one attempt at it. Without further ado let's see what a tool for experimenting in the REPL could look like.</p>
+
+<h2>Defining the experiment</h2>
+
+<p>The experiment I want to attempt today is partly practical since it could come in handy for future blog posts. I want to take a blog post title and convert it into part of the url for the post. You may have heard of it as a <a href="http://patterns.dataincubator.org/book/url-slug.html">url slug</a>. There are plenty of examples out there of making robust url slugs even ones that <a href="http://pydanny.com/awesome-slugify-human-readable-url-slugs-from-any-string.html">account for non-English language</a>. The slug generator in this example is definitely not production worthy so don't take this one to production and we'll both be happy.</p>
+
+<p>Let's start by defining our experiment. A simple title should work to identify our experiment and make it clear what we are trying to accomplish. The next part is the most important part - the hypothesis. This is the thing we are trying to prove or disprove. In this case a simple declarative statement like "A blog title can be converted into a valid url" should work. Feel free to make your hypothesis more descriptive or longer. This seems like a good time to document the assumptions that I want to make for the rest of my experiment. When it comes to slugifying something into a url the main assumptions I need for this experiment are that I can determine if a url is valid or not. Without those assumptions being true my examples probably won't work since I won't have any reasonable way to validate the results of the experiment.</p>
+
+<pre><code>experiment "Convert a blog post title into a valid url slug" (fun _ -&gt;
+
+    hypothesis "A blog title can be converted into a valid url"
+
+    assumption "I can determine when a url is invalid" (fun _ -&gt;
+        expect (("something??/hello there" |&gt; isWellFormedRelativeUri) = false)
+    )
+
+    assumption "I can determine when a url is valid" (fun _ -&gt;
+        expect (("something??/hello-there" |&gt; isWellFormedRelativeUri))
+    )
+
+)
+</code></pre>
+
+<h2>Creating the examples that test the hypothesis</h2>
+
+<p>Now that we have the outline of the experiment and the assumptions that ensure we can test our results let's come up with the experiment examples or steps that fill out the experiment and make it more rigorous. You could build these examples out one at a time creating more and more complex scenarios or you could try to define them all at once. I like the first method as it let's me focus on writing just enough code to make the example work.</p>
+
+<pre><code>experiment "Convert a blog into a valid url" (fun _ -&gt;
+
+    hypothesis "A blog title can be converted into a valid url"
+
+    assumption "I can determine when a url is invalid" (fun _ -&gt;
+        expect (("something??/hello there" |&gt; isWellFormedRelativeUri) = false)
+    )
+
+    assumption "I can determine when a url is valid" (fun _ -&gt;
+        expect (("something??/hello-there" |&gt; isWellFormedRelativeUri))
+    )
+
+    example "Simple one word title" (fun _ -&gt;
+        let slug = toSlug "demo"
+
+        expect ("demo" = slug)
+        expect (slug |&gt; isWellFormedRelativeUri)
+    )
+
+    example "Capitalized one word title" (fun _ -&gt;
+        let slug = toSlug "Demo"
+
+        expect ("demo" = slug)
+        expect (slug |&gt; isWellFormedRelativeUri)
+    )
+
+    example "Phrase as a title" (fun _ -&gt;
+        let slug = toSlug "This post is amazing"
+
+        expect ("this-post-is-amazing" = slug)
+        expect (slug |&gt; isWellFormedRelativeUri)
+    )
+
+    example "Phrase as a title with dashes" (fun _ -&gt;
+        let slug = toSlug "This post is amazing - No Joke"
+
+        expect ("this-post-is-amazing-no-joke" = slug)
+        expect (slug |&gt; isWellFormedRelativeUri)
+    )
+)
+</code></pre>
+
+<p>The REPL friendlyness is in the way this code can be used. You can select and run individual examples or the run the entire expermient. The simple string and function pattern is straight-forward and works as expected. The API tries to be simple and declarative so it stays out of your way and you can think about the problem you are trying to solve and not trying to remember what attribute is needed to get the test runner to see your code. I opted for a simpler "expect" instead of getting into the test framework asserts and comparisons since F# has the expressiveness I was after for this simple experiment.</p>
+
+<h2>Concluding the experiment</h2>
+
+<p>A good experiment is one where findings are documented so they can be compared and shared with others (and so the scientist doesn't forget what the results were). To accomplish that we'll add a findings section where we can document the conclusions we drew from this experiment.</p>
+
+<pre><code>experiment "Convert a blog into a valid url" (fun _ -&gt;
+
+    hypothesis "A blog title can be converted into a valid url"
+
+    assumption "I can determine when a url is invalid" (fun _ -&gt;
+        expect (("something??/hello there" |&gt; isWellFormedRelativeUri) = false)
+    )
+
+    assumption "I can determine when a url is valid" (fun _ -&gt;
+        expect (("something??/hello-there" |&gt; isWellFormedRelativeUri))
+    )
+
+    example "Simple one word title" (fun _ -&gt;
+        let slug = toSlug "demo"
+
+        expect ("demo" = slug)
+        expect (slug |&gt; isWellFormedRelativeUri)
+    )
+
+    example "Capitalized one word title" (fun _ -&gt;
+        let slug = toSlug "Demo"
+
+        expect ("demo" = slug)
+        expect (slug |&gt; isWellFormedRelativeUri)
+    )
+
+    example "Phrase as a title" (fun _ -&gt;
+        let slug = toSlug "This post is amazing"
+
+        expect ("this-post-is-amazing" = slug)
+        expect (slug |&gt; isWellFormedRelativeUri)
+    )
+
+    example "Phrase as a title with dashes" (fun _ -&gt;
+        let slug = toSlug "This post is amazing - No Joke"
+
+        expect ("this-post-is-amazing-no-joke" = slug)
+        expect (slug |&gt; isWellFormedRelativeUri)
+    )
+
+    findings "Creating a url slug from a title is possible! While this method does not account for UTF-8 encodings or foreign languages it solves the cases we were after."
+)
+</code></pre>
+
+<h2>Experiment output</h2>
+
+<p>Running this experiment in the REPL gives us the following output:</p>
+
+<pre><code>Conducting Experiment) Convert a blog into a valid url
+
+    Hypothesis: A blog title can be converted into a valid url
+
+        Assumption) I can determine when a url is invalid - VALID
+
+        Assumption) I can determine when a url is valid - VALID
+
+        Example) Simple one word title - PASSED
+
+        Example) Capitalized one word title - PASSED
+
+        Example) Phrase as a title - PASSED
+
+        Example) Phrase as a title with dashes - PASSED
+
+Findings) Creating a url slug from a title is possible! While this method does not account for UTF-8 encodings or foreign languages it solves the cases we were after.
+
+The experiment (Convert a blog into a valid url) has concluded successfully. Huzzah!
+</code></pre>
+
+<p>This gives us feedback similar to TDD in that we know when something passes or fails and we can adjust accordingly. Now that things are working and our experiment is providing valid results let's talk about how to get the most value out of this simple tool.</p>
+
+<h2>When not to use this code</h2>
+
+<p>The uses for this framework go beyond a single person experimenting with code and abstractions in the REPL. Before we get into what it can be used for let's go over what it's not intended for.</p>
+
+<h3>Usage as a TDD framework for production code</h3>
+
+<p>This is not meant to be a fully featured TDD framework. It will not hook into a test runner and it does not have a TeamCity plugin. If you try and use this for production code testing you may not be happy with the results and I make no claims that it will work. </p>
+
+<p>Now let's brainstorm what you could use it for.</p>
+
+<h2>Suggested usage</h2>
+
+<p>The code is pretty free form and it's up to you and your imagination to come up with uses for it. Here are some of the potential uses I came up with:</p>
+
+<ul>
+<li>Experimenting with new ideas and abstractions
+<ul>
+<li>Showing something tangible is always better than just talking through a problem. Do a quick technical spike and let your experiment be self-documenting. Then you can share your experiment with the team and use it to explore alternatives and design concerns.</li>
+</ul></li>
+<li>Creating consistent and clear steps to recreate an issue
+<ul>
+<li>Imagine a bug report for or a pull request to your open source project that had a clear hypothesis and the steps to recreate the issue showing the expected result. That would be a great use of <a href="http://lefthandedgoat.github.io/canopy/">the canopy web testing library</a>.</li>
+</ul></li>
+<li>Giving junior developers a structure from which they can experiment and propose ideas
+<ul>
+<li>Helping someone else sharpen their problem-solving skills is fun. Use this as a tool to help them think through the problem and as a minimal way to re-create it in a safe environment where they aren't beat up about code-coverage and formatting rules. Standards and best practices can come after understanding the problem and they organize their thoughts enough to create a solution.</li>
+</ul></li>
+</ul>
+
+<h2>Findings</h2>
+
+<p>This was a fun experiment for me. I was able to throw together a simple API for experimenting in the REPL and provide feedback so the code I wrote was sculpted and formed by the immediate usage. I can't claim that either the toSlug function or the experiment API are THE SOLUTION but they are a solution that solves my immediate problem and provides room for growth.</p>
+
+<p>So...how does this stack up to what you came up with? Did you have all sorts of whiz-bang features that would knock someone off their chair? Whether you thnk your solution is amazing or not share it in the comments. I have another post coming soon that will take the experiment idea a little further and look at how we could extend it to be more useful. Stay tuned and happy experimenting!</p>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Further resources</h3>
+  </div>
+  <div class="panel-body">
+      <p>
+        The code for the experiment API can be <a href="https://gist.github.com/frankmeola/9c106aad9d853d6b4229#file-sculpt-fs">found here</a>.
+        <br/>
+        The code for the slug experiment using the F# interactive window can be <a href="https://gist.github.com/frankmeola/9c106aad9d853d6b4229#file-repl-slugexperiment-fsx">found here</a>.
+        <br/>
+        To prove that I'm not some F# snob I created a wrapper for C# so you can compile the experiment API into a dll and use it from LinqPad or scriptcs. The code for the experiment converted to C# can be <a href="https://gist.github.com/frankmeola/9c106aad9d853d6b4229#file-slug-experiment-csharplinqpad-linq">found here<a/>. 
+      </p>
+  </div>
+</div>
+
+
+<br/><hr />
+<div id="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function() {
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+     
+	</div>
+			
+    <!-- FOOTER -->
+<div class="container">
+    <footer>
+        <p style="text-align:center;">Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way.</p>
+        <p class="pull-left">&copy; 2014 Frank Meola</p>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+    </footer>
+</div>
+    
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../static/javascripts/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-48719044-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	
+	<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    <script>
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+           var msViewportStyle = document.createElement('style')
+           msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'))
+           document.querySelector('head').appendChild(msViewportStyle)
+        }
+    </script>
+
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+  </body>
+</html>

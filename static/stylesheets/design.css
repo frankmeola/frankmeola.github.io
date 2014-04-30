@@ -30,6 +30,15 @@ body {
         padding-bottom:10px;
 }
 
+.blog-post-graphic{
+	height:200px;
+	overflow:hidden;
+}
+
+.blog-post-title-link{
+	min-height:80px;
+}
+
 .post-tag-line {
    margin-top:10px;
    margin-botom:10px;
