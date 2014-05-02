@@ -25,13 +25,12 @@ body {
 }
 
 .past-post-image {
-        width:200px;
-        height:auto;
-        padding-bottom:10px;
+	width:200px;
+	height:200px;
 }
 
-.blog-post-graphic{
-	height:200px;
+.blog-post-showoff{
+	padding:0;
 	overflow:hidden;
 }
 

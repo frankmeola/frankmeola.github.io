@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Frank Meola | Sculpt Your Code in a REPL - Part Three</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Frank Meola">
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
+	
+    <!-- Bootstrap core CSS -->
+    <link href="../static/stylesheets/bootstrap.min.css" rel="stylesheet" >
+    <link href="../static/stylesheets/design.css" rel="stylesheet" >
+   
+    <script src="../static/javascripts/html5.js"></script>
+    <script src="../static/javascripts/respond.js"></script>
+		
+  </head>
+  <body>
+    
+    	<!-- NAV -->
+	<div class="bs-component">
+	  <div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="/"><img src="../static/images/logo_grey_transparent_75_40.png" border="0" style="padding:0;margin:0;"/></a>
+		</div>
+		<div class="navbar-collapse collapse navbar-inverse-collapse">
+		  <ul class="nav navbar-nav">
+			<li><a href="../index.html">Home</a></li>
+			<li><a href="../blog/index.html">Blog</a></li>
+			<li><a href="../about_me.html">About Me</a></li>
+			<li><a href="../contact_me.html">Contact Me</a></li>
+		  </ul>
+		</div>
+	</div> 
+
+	<div class="container">
+	
+
+<!--
+template = post
+title = Sculpt Your Code in a REPL - Part Three
+summary = ??
+-->
+
+<div class="well">
+     <div class="row">
+          <div class="col-lg-3 col-lg-offset-3">
+               <img src="../../static/images/blog_media/potters_wheel.jpg" width="300px" />
+Photo courtesy of <a href="https://www.flickr.com/photos/waltstoneburner/5745387762/">https://www.flickr.com/photos/waltstoneburner/5745387762/</a>
+          </div> 
+     </div>
+</div>
+
+<h1><strong>Sculpt Your Code In a REPL - Part Three</strong></h1>
+
+<div class="post-tag-line">
+     <span class="label label-primary">REPL</span>, <span class="label label-primary">F#</span>, <span class="label label-primary">TDD</span>
+</div>
+
+<h2>The future is closer than you think</h2>
+
+<p>It's about time we wrapped up this short series on sculpting code in the REPL. In <a href="2014-4-28-sculpt-your-code-in-a-repl-part-one.html">part one</a> we discussed the idea of a tool that would provide us with feedback while we worked in a REPL. The REPL was our potter's wheel turning the lump of clay that is the code we want to build and the tool we were looking for was a digital stand-in for our hands shaping the code into something well formed and usable. In <a href="2014-4-30-sculpt-your-code-in-a-repl-part-two.html">part two</a> we looked at a simple implementation of an API that let us experiment in the REPL without too much ceremony and that supports the somewhat different workflow that working in a REPL can offer. Now let's take a look at possible enhancements that would build on and improve the experience even more.</p>
+
+<h2>Possible Enhancements</h2>
+
+<h3>Visualize It!</h3>
+
+<p>I was going for the simplest thing possible and I wound up printing textual results to the console of the REPL. That works for me right now but it would be really nice if there was a bit more UI thought put into it. I would like to skip the default answer of "let's hook this up to a test runner" since the semantics of an experiment are unique enough that it would impeded the experience. Having a more graphical interface could prove useful as I could track fun things like the number of times an example fails before it succeeds or the time from start of the experiment to reaching a conclusion. The idea is that the work in the REPL starts to feed into other more analytical components so you can get feedback about your process and potentially use that to work more effectively. Who knows what kind of useful patterns you might find by capturing data about your work while you work!</p>
+
+<h3>A platform for experiments and findings</h3>
+
+<p>Formalized peer review? I thought we didn't want that. Well, maybe it's not such a bad idea. What started out as a tool for me to play with ideas in the REPL could morph into a tool to share that fun with others. They could tweak and test in their REPL and refine my experiment into something more production worthy or come up with a completely different solution that satisfies my hypothesis in a way I never would have thought. Having a solid protocol for transparent experimentation could be an interesting way to reduce the wasted cycles in your team as they all gain confidence in a solution to a technical problem. Something like <a href="http://jsfiddle.net/">JSFiddle</a> or <a href="http://www.tryfsharp.org/Create">Try F#</a> but encouraging comparing different approaches would be interesting to build.</p>
+
+<p>There are definitely other improvements that could be made ot the experiment API that I haven't thought of but let's switch gears and see if we can come up with some enhancements to the REPL itself.</p>
+
+<h3>A Better REPL</h3>
+
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <h3 class="panel-title">Psuedo-code ahead</h3>
+  </div>
+  <div class="panel-body">
+       Most of the code below won't compile. The psuedo-code below is more wishful thinking than grounded in reality.
+  </div>
+</div>
+
+<h4>More Abstractive</h4>
+
+<p>Let's say I've been using the REPL to define functions all day. Maybe the function I forgot the code for is buried all the way in this morning's work. It would be nice if I could retrieve the source code that defines the function from the depths of the REPL session.</p>
+
+<p>For example)</p>
+
+<p>Sometime in the morning I defined the following function:</p>
+
+<pre><code>let someFun x = x * x
+</code></pre>
+
+<p>I have been using it all day in another function but now I want to get the source back for the function so I can add it to the application I am building. It would be great if I could do something like this:</p>
+
+<pre><code>&gt; getSourceDef someFun;;
+    - getSourceDef f -&gt; string : returns the source code that was used to create the function or object
+    Function "someFun" is defined as:
+         let someFun x = x * x
+</code></pre>
+
+<p>Another idea that comes to mind is finding usages of a function or classs in the REPL session. Maybe there is some interesting code that uses the someFun function but I forget what all of it was.</p>
+
+<p>For example)</p>
+
+<p>Given the same someFun function declared we would want to find all the source code that refers to that function in the REPL session. </p>
+
+<p>That might look like:        </p>
+
+<pre><code>&gt; findUsagesOf someFun;;
+    - findUsagesOf f -&gt; list&lt;t&gt; : - get a list of other functions or objects that calls function or object in the current REPL session
+    [myAvg; someBizCalcs;]
+</code></pre>
+
+<h4>More Reactive</h4>
+
+<p>Chris Granger had some great ideas in the <a href="http://www.lighttable.com/">IDE he built</a> that was a bulked up REPL with immediate feedback. I think a happy middle ground between his fully automated version and the current version of most REPLs would have some hooks for responding to events coming out of the REPL.</p>
+
+<p>The main use case I have in mind is to re-run the experiment when a function definition is updated. Maybe I've been drinking too much from the fountain of Functional Reactive Programming (FRP) but being able to handle events and trigger some custom behavior based on them would go a long way to having a more extensible and responsive REPL.  </p>
+
+<p>Being able to easily do something like this would be a huge win:</p>
+
+<pre><code>&gt; onchange someFun (fun f -&gt; match runExperiment with
+                                 | Passed -&gt;  getSourceDef f |&gt; saveCode
+                                 | Failed -&gt; playSadTromboneSound)
+</code></pre>
+
+<p>Now when the someFun function is changed my experiment can automatically be re-run and if it passes then we can grab the code for the function we are testing and store it somewhere. If it fails we can play a <a href="http://www.sadtrombone.com/">sad trombone</a> sound to let me know that I need to keep working on the experiment. Having the REPL talk back and tell you what it did would go a long way to creating a more interactive environment and a more reactive experience.</p>
+
+<h2>The future is yours</h2>
+
+<p>There are many possibilities beyond the few I talked about here. If you have any ideas feel free to add them in the comments. The future is out there waiting for you to build it. Happy dreaming!</p>
+
+
+<br/><hr />
+<div id="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function() {
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+     
+	</div>
+			
+    <!-- FOOTER -->
+<div class="container">
+    <footer>
+        <p style="text-align:center;">Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way.</p>
+        <p class="pull-left">&copy; 2014 Frank Meola</p>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+    </footer>
+</div>
+    
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../static/javascripts/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-48719044-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	
+	<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    <script>
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+           var msViewportStyle = document.createElement('style')
+           msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'))
+           document.querySelector('head').appendChild(msViewportStyle)
+        }
+    </script>
+
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+  </body>
+</html>
