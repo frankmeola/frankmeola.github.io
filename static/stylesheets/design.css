@@ -73,3 +73,28 @@ footer {
         padding-bottom:75px; 
     }
 }
+
+.inputstream-listing{
+	list-style-type: none;
+	margin:0;
+	padding:0;
+}
+
+
+.inputstream-listing li{
+	padding-top:15px;
+	padding-bottom:15px;
+	text-align:center;
+}
+
+.inputstream-type{
+	font-size:24px;
+}
+
+.inputstream-publishdate{
+	font-size:24px;
+}
+
+.inputstream-title{
+	font-size:32px;
+}

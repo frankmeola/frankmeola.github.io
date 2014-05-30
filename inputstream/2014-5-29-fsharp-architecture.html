@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Frank Meola | Sculpt Your Code in a REPL - Part One</title>
+    <title>Frank Meola | A Functional Architecture with F# by Mark Seemann</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,64 +45,47 @@
 	
 
 <!--
-template = post
-title = Sculpt Your Code in a REPL - Part One
-summary = REPLs are great and F# is a concise expressive language. Let's see if we can use each to make the other better.
-head_image = /static/images/blog_media/potters_wheel.jpg
+template = inputstream_post
+title = A Functional Architecture with F# by Mark Seemann
+inputstream_type = Pluralsight Course
 -->
 
-<div class="well">
-     <div class="row">
-          <div class="col-lg-3 col-lg-offset-3">
-               <img src="/static/images/blog_media/potters_wheel.jpg" width="300px" />
-<br/>
-Photo courtesy of <a href="https://www.flickr.com/photos/waltstoneburner/5745387762/">https://www.flickr.com/photos/waltstoneburner/5745387762/</a>
-          </div> 
-     </div>
-</div>
+<h1>A Functional Architecture with F# by Mark Seemann</h1>
 
-<h1><strong>Sculpt Your Code In a REPL - Part One</strong></h1>
+<p>Watched the course <a href="http://pluralsight.com/training/courses/TableOfContents?courseName=functional-architecture-fsharp">A Functional Architecture with F#</a> by Mark Seemann.</p>
 
-<div class="post-tag-line">
-     <span class="label label-primary">REPL</span>, <span class="label label-primary">F#</span>, <span class="label label-primary">TDD</span>
-</div>
+<h2>Content</h2>
 
-<h2>Do what in a what?</h2>
+<p>There was a broad range of topics in the course. </p>
 
-<p>You can use a REPL to sculpt your code. A <a href="http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> is a read-eval-print-loop. REPLs exist in all sorts of places and many programming languages have them. The most well known REPL is probably the JavaScript console in Firebug which inspired the JavaScript Console in FireFox and Chrome. The ability to quickly test out bits of code in a "live" environment was one of the major advancements in web development with JavaScript. You have probably used a REPL with dynamic languages like Python and Ruby but even statically typed languages have REPLs now-a-days like the one that ships with F# <a href="http://msdn.microsoft.com/en-us/library/dd233175.aspx">here</a> and the open source C# based REPL called <a href="http://scriptcs.net/">scriptcs</a>. I would even go as far as calling <a href="http://www.linqpad.net/">LinqPad</a> REPL-esque.</p>
-
-<h2>Why would I want to use <strong>that</strong> thing?</h2>
-
-<p>Developing in a REPL is like developing in a different world. The immediate execution it offers lets you interact with your code much quicker than a traditional compile-configure-run-click-look-loop (aka CCRCLL). With CCRCLL you are at the mercy of whatever UI is covering your code. The UI generally tends to limit your interactions with the code to certain well worn paths. In the REPL you are interacting with your abstractions directly. Create a stopwatch abstraction and start the timer a tickin'. Create a web-scraper and get a scrapin'. Create a &lt;noun&gt; and start a &lt;verbin&gt;'. This feedback loop of creating a thing and immediately trying it out is powerful. (&#42;cough&#42; TDD &#42;cough&#42;)</p>
-
-<p>I like working in a REPL for certain tasks especially when I am experimenting and trying out different approached to a problem. But it's no silver bullet. By itself the REPL is a tool. It's the potters wheel that turns your clay. Much like the potters wheel it doesn't shape the clay for you but simply provides an environmment or platform from which you do the sculpting.</p>
-
-<div class="panel panel-danger">
-  <div class="panel-heading">
-    <h3 class="panel-title">Pretentiousness alarm triggered. Whoop. Whoop.</h3>
-  </div>
-  <div class="panel-body">
-       Whoa whoa. Whoa. I know what your thinking. The portrait of a developer as a young artist is a bit clich&eacute;d and has been beaten to death. But it's my metaphor and I have to find a way to apply all those art classes I took so I am going to use it.
-  </div>
-</div>
-
-<h2>Formed by feedback</h2>
-
-<p>Much like the clay pot being formed by the pressure applied by your fingers we need something to apply pressure to our digital creations. Since the magic is happening on the other side of the glass we need a stand-in that can interact with the abtraction directly. You could use a unit test framework but that is too formal for the type of experimenting I like to do in the REPL. Wait. Experimenting is how I would describe the interaction there. Let's see if that checks out.</p>
+<p>Some of the key topics:</p>
 
 <ul>
-<li>A basic premise or hypothesis that I want to prove out? Check. </li>
-<li>Some example cases that define what a successful result would be? Check.</li>
-<li>A scholarly peer review system that ensure the proper biases are applied? Err...Nope.</li>
+<li>F# based ASP.NET WebAPI website</li>
+<li>Dataflow architecture</li>
+<li>Pipes and filters pattern</li>
+<li>Message based design</li>
+<li>Map/reduce</li>
+<li>F# agents</li>
 </ul>
 
-<p>Seems to check out. </p>
+<h2>Opinion</h2>
 
-<h2>To the Code!</h2>
+<p>The narration was one of my favorite aspects of the course. The tone and inflection made the video interesting as well as informative. It wasn't just a data dump from Mark's brain as he was telling a story and he had the proper inflection and aplomb that made me think he was a regular <a href="http://en.wikipedia.org/wiki/David_Attenborough">Dev Attenborough</a>.</p>
 
-<p>Just kidding. First a little homework. Go play with a REPL - JavaScript, Python, C#, whatever. Then think about what you would build to experiment with code. What would give you the feedback you want? How simple would you make it? How complex? What would the API look like?</p>
+<p>Overall it was like watching someone demo and explain how they wrote a song. The overall teaching and delivery style reminded me of a music teacher I had. </p>
 
-<p>Give it some thought and in my next post I will show you what I came up. Happy designing!</p>
+<p>The general patterns looked like (Music/Code):</p>
+
+<ul>
+<li>Play part of the song/Demonstrate the finished feature</li>
+<li>Step through the notes/Write the code</li>
+<li>Occasionally deep dive on a new technique or pattern/Same</li>
+<li>Step back and explain how it fits the rest of the piece/Same</li>
+<li>Play part of the song/Demonstrate the finished feature - This time adding more context and things to think about</li>
+</ul>
+
+<p>The style was familiar and worked well for me and the content was high quality and hit all the right design notes. Overall a great video series on the topics.</p>
 
 
 <br/><hr />
