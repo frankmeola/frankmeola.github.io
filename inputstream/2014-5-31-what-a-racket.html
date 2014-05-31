@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Frank Meola | Input Stream</title>
+    <title>Frank Meola | What a Racket</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,31 +44,46 @@
 	<div class="container">
 	
 
-<p><!--
-    template = page
-    title = Input Stream
-    --></p>
+<!--
+template = inputstream_post
+title = What a Racket
+inputstream_type = Conference Video
+-->
 
-<h1>Input Stream</h1>
+<h1>What a Racket</h1>
 
-<p>This is a place to put some links to things that I find interesting and maybe a short note on what I liked or learned from it. There is a much lower barrier to entry than a blog post so don't be surprised if there are half-formed ideas or other issues in the writeup.</p>
+<p>I stumbled across this article <a href="http://www.cs.uni.edu/~wallingf/blog/archives/monthly/2013-03.html#e2013-03-27T12_46_03.htm">http://www.cs.uni.edu/~wallingf/blog/archives/monthly/2013-03.html#e2013-03-27T12<em>46</em>03.htm</a> which briefly discusses Racket and SmallTalk and how the languages are envisioned as replacing the operating system. They mention the idea that an operating system shouldn't exist and it only does due to the shortcomings of the computer language.</p>
 
-<ul class="inputstream-listing">
-<li><a href="2014-5-31-what-a-racket.html"><div class="inputstream-title">What a Racket</div></a>
-                <div>
-                    <span class="inputstream-type">Conference Video</span> - <span class="inputstream-publishdate">5/31/2014</span>
-                </div>
-                <div style="font-size:72px;line-height:35px;">...</div>
-            </li><li><a href="2014-5-29-fsharp-architecture.html"><div class="inputstream-title">A Functional Architecture with F# by Mark Seemann</div></a>
-                <div>
-                    <span class="inputstream-type">Pluralsight Course</span> - <span class="inputstream-publishdate">5/29/2014</span>
-                </div>
-                <div style="font-size:72px;line-height:35px;">...</div>
-            </li>   
-</ul>
+<p>The article mentions this video, <a href="http://www.infoq.com/presentations/Racket">http://www.infoq.com/presentations/Racket</a>, which goes over using Racket (a LISP dialect) as an example of language oriented programming. It give an interesting demo and there is a nice summary of it here <a href="http://www.cs.uni.edu/~wallingf/blog/archives/monthly/2012-09.html#e2012-09-29T16_04_35.htm">http://www.cs.uni.edu/~wallingf/blog/archives/monthly/2012-09.html#e2012-09-29T16<em>04</em>35.htm</a> so I won't re-summarize that.</p>
+
+<h2>A language for creating languages</h2>
+
+<p>This set of links really galvanized some ideas I had kicking around. The idea of having a fully extensible system that you define in the domain language is extremely powerful. It's like taking Domain Driven Design to the extreme. I find myself already leaning in this direction and trying to use F# for this purpose. The reason I moved from Wordpress to a static site for my blog is because I wanted to experiment with a more deliberate system with abstractions that I could create myself. </p>
+
+<p>One of the examples in the presentation was a document generator which is used to generate a web based slideshow. I had been thinking about doing some online ebook publishing as a creative experiment and lo-and-behild someone already used Racket to create a tool that was only an early-stage idea in my head - <a href="http://mbutterick.github.io/pollen/doc/">http://mbutterick.github.io/pollen/doc/</a>.</p>
+
+<h2>Living system</h2>
+
+<p>Some of my thoughts on <a href="/blog/2014-5-1-sculpt-your-code-in-a-repl-part-three.html">improving the F# REPL</a> would probably be doable with Racket based on how extensible the environment itself is. At the end of the day programmers debate the static code in the file and seemngly lose track of the fact that the code comes to life and becomes an interactable thing. The LISP machine or SmallTalk environment seems like an interesting idea using this principle and is making me think I should hurry up and dig into one or the other.</p>
 
 
 <br/><hr />
+<div id="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function() {
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
      
 	</div>
 			
