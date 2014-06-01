@@ -19,7 +19,7 @@ body {
 }
 
 .current-post-image {
-        width:200px;
+ /*       width:200px;*/
         height:auto;
         padding-bottom:10px;
 }
