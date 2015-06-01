@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Circuit breaker visualization simulation
+		</title>
+		<!-- <link href='http://fonts.googleapis.com/css?family=Share+Tech' rel='stylesheet' type='text/css'> -->
+		<style>
+		@font-face {
+			font-family: 'Share Tech';
+			src: url('fonts/ShareTech-Regular.ttf'); 
+		}
+		</style>
+		<link href='css/circuit_breaker.css' rel='stylesheet' type='text/css'>
+		<link href='css/circuit_breaker_animations.css' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<div id="options" style="margin-bottom:20px;border-bottom:1px solid #73D8EA;padding:15px;">
+			<input type="checkbox" id="includeAnimations" /><label for="includeAnimations" >Animations</label>
+			<input type="checkbox" id="includeSound" /><label for="includeSound" >Sound Effects</label>
+		</div>
+		<div id="container">
+		</div>
+
+		<script src="js/bio_systems.min.js"></script>
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/moment.min.js"></script>
+		<script src="js/circuit_breaker.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				simulate();
+			});
+		</script>
+	</body>
+</html>

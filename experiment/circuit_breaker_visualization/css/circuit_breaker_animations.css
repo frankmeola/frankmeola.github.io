@@ -1,0 +1,157 @@
+.breakerHalfOpenAlarm {
+  -moz-animation-duration: 3s;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  
+  -moz-animation-name: pulseHalfOpenAlarm;
+  -webkit-animation-name: pulseHalfOpenAlarm;
+  animation-name: pulseHalfOpenAlarm;
+  
+  -moz-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+@-moz-keyframes pulseHalfOpenAlarm {
+	0% {
+		background-color:#C4FF4F;
+	}
+
+	40% {
+		background-color:#FFAF0A;
+		transform:scaleY(1.2);
+	}
+
+	100% {
+		background-color:#C4FF4F;
+	}
+}
+
+@-webkit-keyframes pulseHalfOpenAlarm {
+	0% {
+		background-color:#C4FF4F;
+	}
+
+	40% {
+		background-color:#FFAF0A;
+		transform:scaleY(1.2);
+	}
+
+	100% {
+		background-color:#C4FF4F;
+	}
+}
+
+@keyframes pulseHalfOpenAlarm {
+	0% {
+		background-color:#C4FF4F;
+	}
+
+	40% {
+		background-color:#FFAF0A;
+		transform:scaleY(1.2);
+	}
+
+	100% {
+		background-color:#C4FF4F;
+	}
+}
+
+.breakerOpenAlarm {
+  -moz-animation-duration: 3s;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  
+  -moz-animation-name: pulseOpenAlarm;
+  -webkit-animation-name: pulseOpenAlarm;
+  animation-name: pulseOpenAlarm;
+  
+  -moz-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+@-moz-keyframes pulseAlarm {
+	0% {
+		background-color:#FF5050;
+	}
+
+	40% {
+		background-color:#C31414;
+		transform:scaleY(1.2);
+	}
+
+	100% {
+		background-color:#FF5050;
+	}
+}
+
+@-webkit-keyframes pulseAlarm {
+	0% {
+		background-color:#FF5050;
+	}
+
+	40% {
+		background-color:#C31414;
+		transform:scaleY(1.2);
+	}
+
+	100% {
+		background-color:#FF5050;
+	}
+}
+
+@keyframes pulseOpenAlarm {
+	0% {
+		background-color:#FF5050;
+	}
+
+	40% {
+		background-color:#C31414;
+		transform:scaleY(1.2);
+	}
+
+	100% {
+		background-color:#FF5050;
+	}
+}
+
+.animateHighlightTableItem{
+  -moz-animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  
+  -moz-animation-name: slowBackgroundHighlight;
+  -webkit-animation-name: slowBackgroundHighlight;
+  animation-name: slowBackgroundHighlight;
+}
+
+@-moz-keyframes pulseAlarm {
+  from {
+	background-color:#000;
+  }
+  
+  to {
+	background-color:#22535C;
+  }
+}
+
+@-webkit-keyframes pulseAlarm {
+  from {
+	background-color:#000;
+  }
+  
+  to {
+	background-color:#22535C;
+  }
+}
+
+@keyframes slowBackgroundHighlight {
+  from {
+	background-color:#000;
+  }
+  
+  to {
+	background-color:#22535C;
+  }
+}

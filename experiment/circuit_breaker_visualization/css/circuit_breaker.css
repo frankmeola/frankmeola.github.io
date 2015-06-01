@@ -1,0 +1,308 @@
+body{
+	background-color:black;
+	font-family: 'Share Tech', sans-serif;
+	color:#73D8EA;
+}
+
+.breakerWrapper{
+	width:50%;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	border: 3px double #73D8EA;
+}
+
+.breakerHeader{
+	text-align:center;
+	font-size:32px;
+	font-weight:bold;
+	padding-top:15px;
+	padding-bottom:20px;
+}
+
+.breakerName{
+}
+
+.breakerStatus{
+}
+
+.breakerStatusClosed{
+}
+
+.breakerStatusOpen{
+	border-bottom:2px solid #FF5050;
+}
+
+.breakerStatusHalfOpen{
+	border-bottom:1px solid #C4FF4F;
+}
+
+.breakerDisplay{
+	  margin-left: 10%;
+	  margin-bottom:10px;
+}
+
+.leftSide{
+	font-weight:bold;
+	font-size:22px;
+	float:left;
+	height:50px;
+	padding-top:25px;
+	padding-left:10px;
+	padding-right:10px;
+	width:20%;
+	text-align:right;
+	-webkit-border-bottom-left-radius: 2px;
+	-moz-border-bottom-left-radius: 2px;
+	border-bottom-left-radius: 2px;
+	-webkit-border-top-left-radius: 2px;
+	-moz-border-top-left-radius: 2px;
+	border-top-left-radius: 2px;
+	border-left: 1px solid #73D8EA;
+	border-top: 1px solid #73D8EA;
+	border-bottom: 1px solid #73D8EA;
+}
+
+.rightSide{
+	font-weight:bold;
+	font-size:22px;
+	float:left;
+	height:50px;
+	padding-top:25px;
+	padding-left:10px;
+	padding-right:10px;
+	width:20%;
+	-webkit-border-bottom-right-radius: 2px;
+	-moz-border-bottom-right-radius: 2px;
+	border-bottom-right-radius: 2px;
+	-webkit-border-top-right-radius: 2px;
+	-moz-border-top-right-radius: 2px;
+	border-top-right-radius: 2px;
+	border-right: 1px solid #73D8EA;
+	border-top: 1px solid #73D8EA;
+	border-bottom: 1px solid #73D8EA;
+}
+
+.visualIndicator{
+	float:left;
+	height:50px;
+	width:40%;
+	padding-top:25px;
+	border: 1px solid #73D8EA;
+}
+
+.breakerBar	{
+	height:25px;
+}
+
+.Open{
+	border:1px dashed #73D8EA;
+	background-color:#FF5050;
+	background-image: -webkit-linear-gradient(	
+		to right top,
+		transparent 33%,
+		black 33%,
+		black 66%,
+		transparent 66%
+	);
+	background-image:    -moz-linear-gradient(	
+		to right top,
+		transparent 33%,
+		black 33%,
+		black 66%,
+		transparent 66%
+	);
+	background-image:      -o-linear-gradient(	
+		to right top,
+		transparent 33%,
+		black 33%,
+		black 66%,
+		transparent 66%
+	);
+	background-image: linear-gradient(
+		to right top,
+		transparent 33%,
+		black 33%,
+		black 66%,
+		transparent 66%
+	);
+	background-size: 3px 3px;
+}
+
+.Closed{
+	background-color:#73D8EA;
+	border:1px solid #73D8EA;
+}
+
+.HalfOpen{
+	background-color:#C4FF4F;
+	border:1px dashed #73D8EA;
+	background-image: -webkit-linear-gradient(	
+		to right top,
+		transparent 33%,
+		black 33%,
+		black 66%,
+		transparent 66%
+	);
+	background-image:    -moz-linear-gradient(	
+		to right top,
+		transparent 33%,
+		black 33%,
+		black 66%,
+		transparent 66%
+	);
+	background-image:      -o-linear-gradient(	
+		to right top,
+		transparent 33%,
+		black 33%,
+		black 66%,
+		transparent 66%
+	);
+	background-image: linear-gradient(
+		to right top,
+		transparent 33%,
+		black 33%,
+		black 66%,
+		transparent 66%
+	);
+	background-size: 3px 3px;
+}
+
+.history{
+	margin-left:10%;
+}
+
+.chart{
+	margin-botto	m:20px;
+	padding: 10px;
+	padding-left: 50px;
+	padding-right: 0px;
+	width: 79%;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	border: 1px solid #73D8EA;
+}
+
+.chartOpen{
+	margin-right:2px;
+	float:left;
+	height:40px;
+	width:20px;
+	background-color:#FF5050;
+	border:1px dashed #73D8EA;
+	background-image: -webkit-linear-gradient(	
+		to right top,
+		transparent 33%,
+		black 33%,
+		black 66%,
+		transparent 66%
+	);
+	background-image:    -moz-linear-gradient(	
+		to right top,
+		transparent 33%,
+		black 33%,
+		black 66%,
+		transparent 66%
+	);
+	background-image:      -o-linear-gradient(	
+		to right top,
+		transparent 33%,
+		black 33%,
+		black 66%,
+		transparent 66%
+	);
+	background-image: linear-gradient(
+		to right top,
+		transparent 33%,
+		black 33%,
+		black 66%,
+		transparent 66%
+	);
+	background-size: 3px 3px;
+}
+
+.chartHalfOpen{
+	margin-right:2px;
+	float:left;
+	height:40px;
+	width:20px;
+	background-color:#C4FF4F;
+	border:1px dashed #73D8EA;
+	background-image: -webkit-linear-gradient(	
+		to right top,
+		transparent 33%,
+		black 33%,
+		black 66%,
+		transparent 66%
+	);
+	background-image:    -moz-linear-gradient(	
+		to right top,
+		transparent 33%,
+		black 33%,
+		black 66%,
+		transparent 66%
+	);
+	background-image:      -o-linear-gradient(	
+		to right top,
+		transparent 33%,
+		black 33%,
+		black 66%,
+		transparent 66%
+	);
+	background-image: linear-gradient(
+		to right top,
+		transparent 33%,
+		black 33%,
+		black 66%,
+		transparent 66%
+	);
+	background-size: 3px 3px;
+}
+
+.chartClosed{
+	margin-right:2px;
+	float:left;
+	height:40px;
+	width:20px;
+	background-color:#73D8EA;
+	border:1px solid #73D8EA;
+}
+
+.statusHistory{
+	width: 79%;
+	border-spacing: 0;
+	border-collapse: collapse;
+	margin-left:20px;
+	margin-bottom:20px;
+}
+
+.statusHistory thead th{
+	border-bottom: 2px solid #73D8EA;
+	text-align:left;
+	margin:0;
+	padding:8px;
+	line-height: 1.42857143;
+	vertical-align: top;
+}
+
+.statusHistory tbody td{
+	border-bottom: 1px solid #73D8EA;
+	margin:0;
+	padding:8px;
+	line-height: 1.42857143;
+	vertical-align: top;
+}
+
+.statusHistory a{
+	color:#73D8EA;
+}
+
+.highlightChartItem{
+	border-top:3px solid white;
+	margin-top:2px;
+}
+
+.highlightTableItem{
+	background-color:#22535C;
+}
