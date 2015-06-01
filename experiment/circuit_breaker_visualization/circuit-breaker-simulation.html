@@ -21,7 +21,24 @@
 		</div>
 		<div id="container">
 		</div>
-
+		<script id="breakerTmpl" type="text/template">
+			<div id="breaker" class="breakerWrapper">
+				<div class="breakerComponents">
+					<div class="breakerHeader"><span class="breakerName"></span> is <span class="breakerStatus"></span></div>
+					<div class="breakerDisplay">
+						<div class="leftSide"></div>
+						<div class="visualIndicator"><div class="breakerBar open"></div></div>
+						<div class="rightSide"></div>
+						<br clear="both"/>
+					</div>
+					<div class="chart"><div class="chartItems"></div><br clear="both"/></div>
+					<table class="statusHistory" cellpadding="0" cellspacing="0">
+						<thead><tr><th>Status</th><th>On</th><th>Details</th></tr></thead>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</script>
 		<script src="js/bio_systems.min.js"></script>
 		<script src="js/jquery-2.1.4.min.js"></script>
 		<script src="js/moment.min.js"></script>

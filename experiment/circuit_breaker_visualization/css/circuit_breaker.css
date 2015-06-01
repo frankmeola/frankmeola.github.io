@@ -12,6 +12,11 @@ body{
 	border: 3px double #73D8EA;
 }
 
+.breakerComponents{
+	margin-left:10%;
+	margin-right:10%;
+}
+
 .breakerHeader{
 	text-align:center;
 	font-size:32px;
@@ -38,7 +43,6 @@ body{
 }
 
 .breakerDisplay{
-	  margin-left: 10%;
 	  margin-bottom:10px;
 }
 
@@ -50,7 +54,7 @@ body{
 	padding-top:25px;
 	padding-left:10px;
 	padding-right:10px;
-	width:20%;
+	width:30%;
 	text-align:right;
 	-webkit-border-bottom-left-radius: 2px;
 	-moz-border-bottom-left-radius: 2px;
@@ -71,7 +75,7 @@ body{
 	padding-top:25px;
 	padding-left:10px;
 	padding-right:10px;
-	width:20%;
+	width:30%;
 	-webkit-border-bottom-right-radius: 2px;
 	-moz-border-bottom-right-radius: 2px;
 	border-bottom-right-radius: 2px;
@@ -86,7 +90,7 @@ body{
 .visualIndicator{
 	float:left;
 	height:50px;
-	width:40%;
+	width:33%;
 	padding-top:25px;
 	border: 1px solid #73D8EA;
 }
@@ -168,16 +172,11 @@ body{
 	background-size: 3px 3px;
 }
 
-.history{
-	margin-left:10%;
-}
-
 .chart{
-	margin-botto	m:20px;
+	margin-bottom:20px;
 	padding: 10px;
-	padding-left: 50px;
+	padding-left: 25px;
 	padding-right: 0px;
-	width: 79%;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
@@ -270,7 +269,7 @@ body{
 }
 
 .statusHistory{
-	width: 79%;
+	width: 93%;
 	border-spacing: 0;
 	border-collapse: collapse;
 	margin-left:20px;
