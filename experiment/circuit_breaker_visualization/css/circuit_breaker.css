@@ -44,14 +44,15 @@ body{
 
 .breakerDisplay{
 	  margin-bottom:10px;
+	  width:100%;
 }
 
 .leftSide{
 	font-weight:bold;
 	font-size:22px;
-	float:left;
 	height:50px;
 	padding-top:25px;
+	padding-bottom:25px;
 	padding-left:10px;
 	padding-right:10px;
 	width:30%;
@@ -70,9 +71,9 @@ body{
 .rightSide{
 	font-weight:bold;
 	font-size:22px;
-	float:left;
 	height:50px;
 	padding-top:25px;
+	padding-bottom:25px;
 	padding-left:10px;
 	padding-right:10px;
 	width:30%;
@@ -88,10 +89,10 @@ body{
 }
 
 .visualIndicator{
-	float:left;
 	height:50px;
 	width:31%;
 	padding-top:25px;
+	padding-bottom:25px;
 	border: 1px solid #73D8EA;
 }
 
