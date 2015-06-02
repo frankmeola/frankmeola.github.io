@@ -88,7 +88,7 @@ head_image = /static/images/blog_media/circuit_breaker_open.png
 
 <p>One of the most important aspects of the circuit breaker is the current state. If it is open then something is broken and either your users are seeing a degraded experience or you are losing money or both.</p>
 
-<p>The first part of the visualization is the current state of the breaker. The current state is represented in two ways: text and visually. When things are operating normal there is no special indicator but when the state of the circuit breaker is half-open or open we try to indicate something unusual by underlining the state text with yellow and red respectively.</p>
+<p>The first part of the visualization is the current state of the breaker. The current state is represented in two ways: text and visually. When things are operating normally there is no special indicator but when the state of the circuit breaker is half-open or open we try to indicate something unusual by underlining the state text with yellow and red respectively.</p>
 
 <p>The same information is also shown visually in the fuse indicator. This plays a bit to a skeumorphic design where a fuse is a type of circuit breaker. Here we see what two components are connected by the circuit breaker. In the example below there is some code we wrote, the PaymentGateway, calling Paypal's API and our circuit breaker is monitoring that connection.</p>
 
@@ -119,15 +119,15 @@ head_image = /static/images/blog_media/circuit_breaker_open.png
   </div>
 </div>
 
-<h3>History</h3>
+<h3>State History</h3>
 
 <p>Since we are watching what the system is doing we want to keep track of the history of state changes so we can troubleshoot issues while things are happening. To support this there are again two complementary representations of the history: visual indicators and a data table.</p>
 
 <p>The visual indicators are smaller versions of the fuse we use in the current state. This gives a visual and colorful way to represent the history as it happens. The most recent status is the furthest on the right going back in time to the left.</p>
 
-<p>The data table shows the state and the time it changed. When the state is half-open or open the details column contains a link to more information on the error. This can help track what issue cause the breaker state to change. </p>
+<p>The data table shows the state and the time it changed. When the state is half-open or open the details column contains a link to more information on the error. This can help track what issue caused the breaker state to change. </p>
 
-<p>The visual indicator and data table are correlated so that when you hover over one or the other it's corresponding alternate is highlighted. In the below example you can see how the  latest state of open is highlighted in the table and the visual indicator for that has a small border and is slightly proud of the others.</p>
+<p>The visual indicator and data table are correlated so that when you hover over one or the other its corresponding alternate is highlighted. In the below example you can see how the  latest state of open is highlighted in the table and the visual indicator for that has a small border and is slightly proud of the others.</p>
 
 <div class="panel panel-primary">
   <div class="panel-heading">
