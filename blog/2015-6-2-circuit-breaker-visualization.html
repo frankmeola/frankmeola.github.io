@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Frank Meola | Circuit Breaker Visualizer</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Frank Meola">
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
+	
+    <!-- Bootstrap core CSS -->
+    <link href="../static/stylesheets/bootstrap.min.css" rel="stylesheet" >
+    <link href="../static/stylesheets/design.css" rel="stylesheet" >
+   
+    <script src="../static/javascripts/html5.js"></script>
+    <script src="../static/javascripts/respond.js"></script>
+		
+  </head>
+  <body>
+    
+    	<!-- NAV -->
+	<div class="bs-component">
+	  <div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="/"><img src="../static/images/logo_grey_transparent_75_40.png" border="0" style="padding:0;margin:0;"/></a>
+		</div>
+		<div class="navbar-collapse collapse navbar-inverse-collapse">
+		  <ul class="nav navbar-nav">
+			<li><a href="../index.html">Home</a></li>
+			<li><a href="../blog/index.html" title="Things I am coding, writing, or thinking.">Blog</a></li>
+			<li><a href="../inputstream/index.html" title="Things I am reading, watching, or reviewing.">Input Stream</a></li>
+			<li><a href="../about_me.html">About Me</a></li>
+			<li><a href="../contact_me.html">Contact Me</a></li>
+		  </ul>
+		</div>
+	</div> 
+
+	<div class="container">
+	
+
+<!--
+template = post
+title = Circuit Breaker Visualizer
+summary = Visualize your circuit breaker.
+head_image = /static/images/blog_media/circuit_breaker_open.png
+-->
+
+<div class="well">
+     <div class="row">
+          <div class="col-lg-3 col-lg-offset-1">
+               <img src="/static/images/blog_media/circuit_breaker_header.png" />
+          </div>
+     </div>
+</div>
+
+<h1><strong>Circuit Breaker Visualizer</strong></h1>
+
+<div class="post-tag-line">
+     <span class="label label-primary">UI</span>, <span class="label label-primary">Design</span>, <span class="label label-primary">DevOps</span>, <span class="label label-primary">Reliability</span>
+</div>
+
+<p>You can't throw a stick at a discussion on reliability without hitting someone talking about the circuit breaker pattern. Martin Fowler has a nice <a href="http://martinfowler.com/bliki/CircuitBreaker.html">writeup on Circuit Breakers</a> that you might want to read to familiarize yourself. </p>
+
+<p>Here's the main point of a circuit breaker in software:</p>
+
+<blockquote>
+  <p>The basic idea behind the circuit breaker is very simple. You wrap a protected function call in a circuit breaker object, which monitors for failures. Once the failures reach a certain threshold, the circuit breaker trips, and all further calls to the circuit breaker return with an error, without the protected call being made at all. Usually you'll also want some kind of monitor alert if the circuit breaker trips.</p>
+  <small>Martin Fowler from <cite title="Circuit Breaker"><a href="http://martinfowler.com/bliki/CircuitBreaker.html">http://martinfowler.com/bliki/CircuitBreaker.html</a></cite></small>
+</blockquote>
+
+<p>This post picks up from the last sentence in the above quote. I've seen countless examples of implementing a circuit breaker in code. I've seen a dozen Java classes, fifteen C# classes, and four Ruby poems each with slightly different implementations of the circuit breaker pattern. Until recently I didn't see any examples of visualizing or showing the circuit breaker in the UI.</p>
+
+<h2>If I can't see it then it doesn't exist</h2>
+
+<p>Let's start with a picture of the final product.</p>
+
+<p><img src="/static/images/blog_media/circuit_breaker_open.png" /></p>
+
+<p>Now let's take a look at the main aspects of the design.</p>
+
+<h3>Current State</h3>
+
+<p>One of the most important aspects of the circuit breaker is the current state. If it is open then something is broken and either your users are seeing a degraded experience or you are losing money or both.</p>
+
+<p>The first part of the visualization is the current state of the breaker. The current state is represented in two ways: text and visually. When things are operating normal there is no special indicator but when the state of the circuit breaker is half-open or open we try to indicate something unusual by underlining the state text with yellow and red respectively.</p>
+
+<p>The same information is also shown visually in the fuse indicator. This plays a bit to a skeumorphic design where a fuse is a type of circuit breaker. Here we see what two components are connected by the circuit breaker. In the example below there is some code we wrote, the PaymentGateway, calling Paypal's API and our circuit breaker is monitoring that connection.</p>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Closed - Everything is normal</h3>
+  </div>
+  <div class="panel-body">
+    <img src="/static/images/blog_media/circuit_breaker_current_closed.png" />
+  </div>
+</div>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Half Open - Something failed but not enough times to stop us from trying again</h3>
+  </div>
+  <div class="panel-body">
+    <img src="/static/images/blog_media/circuit_breaker_current_halfopen.png" />    
+  </div>
+</div>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Open - Failed enough times to open the circuit and prevent us trying again for a while</h3>
+  </div>
+  <div class="panel-body">
+    <img src="/static/images/blog_media/circuit_breaker_current_open.png" />
+  </div>
+</div>
+
+<h3>History</h3>
+
+<p>Since we are watching what the system is doing we want to keep track of the history of state changes so we can troubleshoot issues while things are happening. To support this there are again two complementary representations of the history: visual indicators and a data table.</p>
+
+<p>The visual indicators are smaller versions of the fuse we use in the current state. This gives a visual and colorful way to represent the history as it happens. The most recent status is the furthest on the right going back in time to the left.</p>
+
+<p>The data table shows the state and the time it changed. When the state is half-open or open the details column contains a link to more information on the error. This can help track what issue cause the breaker state to change. </p>
+
+<p>The visual indicator and data table are correlated so that when you hover over one or the other it's corresponding alternate is highlighted. In the below example you can see how the  latest state of open is highlighted in the table and the visual indicator for that has a small border and is slightly proud of the others.</p>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Circuit breaker history showing latest state changes</h3>
+  </div>
+  <div class="panel-body">
+    <img src="/static/images/blog_media/circuit_breaker_history.png" />
+  </div>
+</div>
+
+<h3>Caution: Moving Parts</h3>
+
+<p>Up until now we have been looking at picture of this visualization. However, in real life this would be a dynamic and changing visualization. It would be refreshing and growing as the state changes and the system is used.</p>
+
+<p>To see a simulation of this visualization responding to real-time data <a href="/experiment/circuit_breaker_visualization/circuit-breaker-simulation.html">click here</a>.</p>
+
+<p>You can use the checkboxes at the top of the demo to add experimental elements like using animations or sound effects to draw more attention to the state changes.</p>
+
+<h2>Where can we go from here?</h2>
+
+<p>This was one take on a circuit breaker visualization. I'll admit it was a bit skeumorphic and depending on your taste that may not be what you are into. There is plenty of room for improvement and I would love to hear suggestions. After building this I came up with all sorts of questions like "Can I put a button on the visualzation that would change the state of the circuit breaker in the system?" and "How would a group of these show on a dashboard?". In terms of code quality it was a fun prototype to build but it's not production ready. It would probably be worth bringing <a href="http://d3js.org/">d3.js</a> in to handle the visualizations instead of re-inventing the wheel like I did. There is definitely room to improve the responsiveness of the design so that it shows up well on all screen sizes instead of just working on desktop as it does now.</p>
+
+<p>Other options include taking a cue from Nextflix's design and showing more statistical information like error rate and throughput. I held off on adding those in since I wanted to focus purely on the circuit breaker and not the surrounding data flowing through the system.</p>
+
+<p>Let me know if you run into any issues with the live demo or you have any suggestions. Here's to visibly reliable systems!</p>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Further resources</h3>
+  </div>
+  <div class="panel-body">
+      <p>
+        <ul>
+            <li><a href="https://pragprog.com/book/mnee/release-it"/>ReleaseIt! - the book that popularized the circuit breaker pattern</a></li>
+            <li><a href="http://martinfowler.com/bliki/CircuitBreaker.html"/>A good definition of the circuit breaker pattern</a></li>
+            <li><a href="http://msdn.microsoft.com/en-us/library/dn589784.aspx"/>Microsoft's example of circuit breaker pattern</a></li>
+            <li><a href="http://techblog.netflix.com/2011/12/making-netflix-api-more-resilient.html"/>Nextflix detailed usage of circuit breaker and first visualization of it I had come across.</a></li>
+            <li><a href="http://blog.fogcreek.com/hystrix-dashboard-tech-talk-with-demo/"/>Nice tech talk by Fog Creek with a video of Netflix's Hystrix dashboard running and visualizing the circuit breaker status.</a></li>
+            <li><a href="http://doc.akka.io/docs/akka/snapshot/common/circuitbreaker.html"/>Java Actor library Akka's expplanation of the circuit breaker pattern</a></li>
+            <li><a href="http://www.dalnefre.com/wp/2011/06/circuit-breaker-stability-pattern/"/>Another actor based circuit breaker pattern with video visualizing the breaker</a></li>
+      </p>
+  </div>
+</div>
+
+
+<br/><hr />
+<div id="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function() {
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+     
+	</div>
+			
+    <!-- FOOTER -->
+<div class="container">
+    <footer>
+        <p style="text-align:center;">Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way.</p>
+        <p class="pull-left">&copy; 2014 Frank Meola</p>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+    </footer>
+</div>
+    
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../static/javascripts/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-48719044-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	
+	<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    <script>
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+           var msViewportStyle = document.createElement('style')
+           msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'))
+           document.querySelector('head').appendChild(msViewportStyle)
+        }
+    </script>
+
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+  </body>
+</html>
