@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Frank Meola | JavaScript Performance Analysis And The Mutating Interface: Part One</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Frank Meola">
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
+	
+    <!-- Bootstrap core CSS -->
+    <link href="../static/stylesheets/bootstrap.min.css" rel="stylesheet" >
+    <link href="../static/stylesheets/design.css" rel="stylesheet" >
+   
+    <script src="../static/javascripts/html5.js"></script>
+    <script src="../static/javascripts/respond.js"></script>
+		
+  </head>
+  <body>
+    
+    	<!-- NAV -->
+	<div class="bs-component">
+	  <div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="/"><img src="../static/images/logo_grey_transparent_75_40.png" border="0" style="padding:0;margin:0;"/></a>
+		</div>
+		<div class="navbar-collapse collapse navbar-inverse-collapse">
+		  <ul class="nav navbar-nav">
+			<li><a href="../index.html">Home</a></li>
+			<li><a href="../blog/index.html" title="Things I am coding, writing, or thinking.">Blog</a></li>
+			<li><a href="../inputstream/index.html" title="Things I am reading, watching, or reviewing.">Input Stream</a></li>
+			<li><a href="../about_me.html">About Me</a></li>
+			<li><a href="../contact_me.html">Contact Me</a></li>
+		  </ul>
+		</div>
+	</div> 
+
+	<div class="container">
+	
+
+<!--
+template = post
+title = JavaScript Performance Analysis And The Mutating Interface: Part One
+summary = Data beats guessing when performance issues arise. 
+head_image = /static/images/blog_media/profesh_profiling_tools.png
+-->
+
+<div class="well">
+     <div class="row">
+            <div class="col-lg-3 col-lg-offset-3">
+                     <img src="/static/images/blog_media/profesh_profiling_tools.png" />
+                             <br/>
+            </div>
+        </div>
+</div>
+
+<h1><strong>JavaScript Performance Analysis And The Mutating Interface: Part One</strong></h1>
+
+<h2>Dev Team, We've Got A Problem</h2>
+
+<p>You have a problem. People are starting to whisper that you web app is slow and unresponsive. In particular there is a page where the data is taking forever to load. The frontend developers are pointing fingers at the backend developers and saying the backend and database are too slow. The backend developers are pointing fingers at the frontend developers and saying the heavy JavaScript MVC framework they are using is too slow. Tempers flare and soon the real issue that the users are unhappy with the application is lost in the ensuing ego storm. Not one to get caught up in the blame game you dive into the code and start looking for answers.</p>
+
+<h2>What do we have here?</h2>
+
+<p>Let's take a look at a code snippet (generalized of course) where the team suspected the issue was.</p>
+
+<script src="https://gist.github.com/frankmeola/a421a638cf59b461b00a.js?file=uninstremented_example.js"></script>
+
+<p>This code is extremely basic and it happens to live inside an AngularJs controller. It requests some data from the server and then an AngularJs factory updates a scope variable so the UI can update accordingly.</p>
+
+<h2>Simplest thing that could work</h2>
+
+<p>Tempers are still flaring and team communication and trust is stretched thin so we just need the simplest thing that will work. I am not concerned with fancy coding tricks or technical feats of wizardry. I need simple, understandable, and trustworthy. Another thing I need is controllable granularity of performance profiling. I won't get much value at this early discovery stage from a peformance profiler that shows me the small detailed stats on event listeners and anonymous functions. I need large coarse measurements that can help me identify the areas with the most room for improvement. With that in mind let's take a look at what those requirements led me to build. </p>
+
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <h3 class="panel-title">Detailed JavaScript profiling</h3>
+  </div>
+  <div class="panel-body">
+   Since I am talking about macro-optimization at the moment I am ignoring existing JavaScript profilers. For more information on those check out <a href="https://developer.chrome.com/devtools/docs/cpu-profiling">Chrome's profiler</a> and <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Performance/Profiling_with_the_Built-in_Profiler">Firefox's profiler</a>. These are helpful when you figure out the obvious bottlenecks and need more detail but right now it is too much info to be usable.
+  </div>
+</div>
+
+<h2>No-frills Profiler</h2>
+
+<p>After doing a quick search for something someone already built that would fit my needs and coming up empty here was what I came up with.</p>
+
+<script src="https://gist.github.com/frankmeola/a421a638cf59b461b00a.js?file=stopwatch.js"></script>
+
+<p>Taking this simple code we can instrument the earlier example as follows.</p>
+
+<script src="https://gist.github.com/frankmeola/a421a638cf59b461b00a.js?file=instrumented_examples.js"></script>
+
+<h2>High level performance</h2>
+
+<p>It helps to have a high level picture of what is going on in the page you are profiling. For the page I am focused on it breaks down into a few operations. </p>
+
+<ul>
+<li>Load data from server: <code>getDataTimer</code> tracks how long the AJAX request takes. This will let us know if getting the data itself is the issues and could help us focus more on the backend system performance or the handoff between backend and frontend.</li>
+<li>Format data for display: <code>manipulateDataTimer</code> tracks how long it takes us to add the display formatting needed for the page. For this example ignore the stupidness and just trust me that it is needed.</li>
+<li>Bind data to grid: <code>updateDataTimer</code> tracks how long it takes to update the data source. Since data is an array of n items there might be performance issues for a large enough array.</li>
+</ul>
+
+<p>Some team members thought that a slow response from the server was holding the page render up. Others thought that the map function to format the data was too slow and should use an optimized <code>for</code> loop instead of the map function provided by <a href="https://lodash.com/">lodash</a>. </p>
+
+<p>We ran the instrumented code and found the results that showed up in the console:</p>
+
+<pre><code>Get data time in ms 23
+Manipulate data time in ms 15
+Update datasource time in ms 90000
+</code></pre>
+
+<p>Once we measured with the instrumented code it became clear what the issue was - the data source update! The data load and manipulation were both sub second while the data source update was taking over a minute in Chrome. When we looked at the update function we immediately found the culprit:</p>
+
+<script src="https://gist.github.com/frankmeola/a421a638cf59b461b00a.js?file=unoptimized_update.js"></script>
+
+<h2>Performance Analysis and Resolution</h2>
+
+<p>What do we have here? We create a new observableArray. We can mostly ignore what an observableArray is and just summarize it as an array that raises events when data changes so that client code can immediately refresh. We then iterate over the data and add items one at a time. Since this was an observable array it was raising events everytime we added an item. The events coupled with the inherent slowness of iterating one item at a time was wasting CPU cycles, eating memory as events fired, and it was destroying the responsiveness of the web app.</p>
+
+<p>A little research into the API documentation for the observableArray and we replaced the update function with the following code:</p>
+
+<script src="https://gist.github.com/frankmeola/a421a638cf59b461b00a.js?file=optimized_update.js"></script>
+
+<p>Here are the results after running the code using the new update:</p>
+
+<pre><code>Get data time in ms 21
+Manipulate data time in ms 19
+Update datasource time in ms 10
+</code></pre>
+
+<p>It turns out that the observableArray had a function that would bulk load data and skip most of the event firing. Re-profiling the code showed that this operation turned the on average 1.5 minute update into a 0.01 second operation. It was no longer the bottleneck and everyone was relieved that we had found and solved the performance issue.</p>
+
+<p>As a side benefit since we had encapsulated this operation into the update function other parts of the app also reported improved performance as everyone benefitted from the reduced update time.</p>
+
+<h2>Tune In Next Time</h2>
+
+<p>The team celebrated and congratulated each other. Not only had they solved the issue and made the users happy but they had done it together with data and not emotions.</p>
+
+<p>In part two we will tear apart the stopwatch code that we created and see if we can make it's usage clearer and less bug ridden. Tune in next time and remember performance problems like to be measured more than guessed. It shows them that you care :-)</p>
+
+
+<br/><hr />
+<div id="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function() {
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+     
+	</div>
+			
+    <!-- FOOTER -->
+<div class="container">
+    <footer>
+        <p style="text-align:center;">Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way.</p>
+        <p class="pull-left">&copy; 2014 Frank Meola</p>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+    </footer>
+</div>
+    
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../static/javascripts/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-48719044-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	
+	<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    <script>
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+           var msViewportStyle = document.createElement('style')
+           msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'))
+           document.querySelector('head').appendChild(msViewportStyle)
+        }
+    </script>
+
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+  </body>
+</html>
