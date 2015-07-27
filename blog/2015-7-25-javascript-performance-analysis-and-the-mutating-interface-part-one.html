@@ -106,7 +106,7 @@ head_image = /static/images/blog_media/profesh_profiling_tools.png
 <p>It helps to have a high level picture of what is going on in the page you are profiling. For the page I am focused on it breaks down into a few operations. </p>
 
 <ul>
-<li>Load data from server: <code>getDataTimer</code> tracks how long the AJAX request takes. This will let us know if getting the data itself is the issues and could help us focus more on the backend system performance or the handoff between backend and frontend.</li>
+<li>Load data from server: <code>getDataTimer</code> tracks how long the AJAX request takes. This will let us know if getting the data itself is the issue and could help us focus more on the backend system performance or the handoff between backend and frontend.</li>
 <li>Format data for display: <code>manipulateDataTimer</code> tracks how long it takes us to add the display formatting needed for the page. For this example ignore the stupidness and just trust me that it is needed.</li>
 <li>Bind data to grid: <code>updateDataTimer</code> tracks how long it takes to update the data source. Since data is an array of n items there might be performance issues for a large enough array.</li>
 </ul>
