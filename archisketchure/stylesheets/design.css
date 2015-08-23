@@ -1,0 +1,71 @@
+body{
+	background-color:#006DDE;
+	color:white;
+	font-family: 'Droid Sans', sans-serif;
+	line-height:1.5em;
+	background-image:url("../images/grid_bg_optimized.png");
+}
+
+h1, h2, h3, h4, h5, h6{
+	font-family: 'Lato', sans-serif;
+}
+
+.innerContainer{
+	margin:20px;
+	border:1px solid white;
+	padding:20px;
+}
+
+.container{
+	background-color:#006DDE;
+	margin-top:2%;
+	margin-left:5%;
+	margin-right:5%;
+	border:1px solid white;
+}
+
+.boxInTopLeft{
+	border-top: 1px solid white;
+	border-left: 1px solid white;
+	width:200px;
+	height:50px;
+}
+
+.sectionNotes{
+	padding:10px;
+}
+
+.sectionNotesHeader{
+	background-image: url("../images/sectionBoxTopLeft.png");
+	background-repeat: no-repeat;
+	padding-top:10px;
+	padding-left:10px;
+}
+
+.sectionNotesContent{
+	background-image: url("../images/sectionBoxBottomRight.png");
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	padding-bottom:5px;
+	padding-left:10px;
+	padding-right:10px;
+	display:inline-block;
+}
+
+.sectionNoteFigureDescription{
+	text-align:center;
+}
+
+.mainTitle{
+	font-family: 'Lato', sans-serif;
+	font-size:72px;
+}
+
+.tagLine{
+	font-size:24px;
+}
+
+.footer{
+	margin-top:50px;
+	font-size:10px;
+}
