@@ -37,6 +37,8 @@ img{
 	height:auto;
 }
 
+@media \0screen {img { width: auto }}
+
 h1, h2, h3, h4, h5, h6{
 	font-family: 'Lato', sans-serif;
 }
@@ -46,10 +48,14 @@ h1, h2, h3, h4, h5, h6{
 	padding:20px;
 	border:1px solid white;
 	border-radius:25px;
+	display:table;
 }
 
 .container{
+	margin-left:2%;
+	margin-right:2%;
 	border:1px solid white;
+	display:table;
 }
 
 .boxInTopLeft{
