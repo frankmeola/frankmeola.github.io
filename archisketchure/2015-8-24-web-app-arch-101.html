@@ -16,15 +16,6 @@
   <body>
 	<div class="container">
 		<div class="innerContainer">
-			<div>
-				<img style="float:left;" src="images/logo_optimized.png" width="350px" />
-				<div style="float:left;margin-top:20px;">
-					<img style="float:left;" src="images/logo_text_optimized.png" />
-					<!--<span class="mainTitle">Archisketchure</span><div style="text-align:right;" class="tagLine">exercises in design</div>-->
-					<br clear="all"/>
-				</div>
-				<br clear="all"/>
-			</div>
 		
 			
 
@@ -33,44 +24,69 @@ template = archisketchure
 title = Application Architecure 101
 -->
 
-<h1>Web Application Architecture 101</h1>
+<table cellspacing="0" cellpadding="0" border="0" class="blueprintNotes">
+    <tr>
+        <td class="blueprintTag blueprintSeperator blueprintRightSeperator"><img src="images/logo_optimized.png" width="75px" />Archisketchure:exercises in design</td>
+        <td class="blueprintTag blueprintSeperator">
+            <div class="blueprintMemo">Drafter</div>
+            <div class="blueprintInfo">Frank Meola</div>
+        </td>
+    </tr>
+    <tr>
+        <td class="blueprintTag blueprintRightSeperator">
+            <div class="blueprintMemo">Title</div>
+            <div class="blueprintInfo">Web Application Architecture 101</div>
+        </td>
+        <td class="blueprintTag">
+            <div class="blueprintMemo">Date</div>
+            <div class="blueprintInfo">8/25/2015</div>
+        </td>
+    </tr>
+</table>
 
-<div class="sectionNotes">
-    <h2 class="sectionNotesHeader">Two-tier</h2>
-    <div class="sectionNotesContent">
-        <p>The two-tiered monolith web application. </p>
+<table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+    <td style="vertical-align: top;padding-right:25px;">
+        <div class="sectionNotes">
+            <h2 class="sectionNotesHeader">Two-tier</h2>
+            <div class="sectionNotesContent">
+                <p>The two-tiered monolith web application. </p>
 
-        <img src="images/2tier_instance.png" />
-        <h4 class="sectionNoteFigureDescription">Figure: Two-tier Web Application (Single Instance)</h4>
+                <img src="images/2tier_instance.png" />
+                <h4 class="sectionNoteFigureDescription">Figure: Two-tier Web Application (Single Instance)</h4>
 
-        <ul>
-            <li>Usually the default style</li>
-            <li>Simple and easy to setup</li>
-        </ul>
+                <ul>
+                    <li>Usually the default style</li>
+                    <li>Simple and easy to setup</li>
+                </ul>
 
-        <img src="images/2tier_ecosystem.png" />
-        <h4 class="sectionNoteFigureDescription">Figure: Two-tier Web Application (Ecosystem)</h4>
-        <p>As these proliferate they tend to integrate via a shared DB.<p>
-    </div>
-</div>
+                <img src="images/2tier_ecosystem.png" />
+                <h4 class="sectionNoteFigureDescription">Figure: Two-tier Web Application (Ecosystem)</h4>
+                <p>As these proliferate they tend to integrate via a shared DB.<p>
+            </div>
+        </div>
+    </td>
+    <td style="vertical-align: top;">
+            <div class="sectionNotes">
+                <h2 class="sectionNotesHeader">Three-tier</h2>
+                <div class="sectionNotesContent">
+                    <p>Three-tier architecure introduced a service layer between the web layer and the DB.</p>
+                    <img src="images/3tier_instance.png" />
+                    <h4 class="sectionNoteFigureDescription">Figure: Three-tier Web Application (Single Instance)</h4>
+                    <p>The service layer encapsulates business logic and data access and provides an API for web layer.</p>
 
-<div class="sectionNotes">
-    <h2 class="sectionNotesHeader">Three-tier</h2>
-    <div class="sectionNotesContent">
-        <p>Three-tier architecure introduced a service layer between the web layer and the DB.</p>
-        <img src="images/3tier_instance.png" />
-        <h4 class="sectionNoteFigureDescription">Figure: Three-tier Web Application (Single Instance)</h4>
-        <p>The service layer encapsulates business logic and data access and provides an API for web layer.</p>
+                    <img src="images/3tier_ecosystem.png" />
+                    <h4 class="sectionNoteFigureDescription">Figure: Three-tier Web Application (Ecosystem)</h4>
+                    <p>Commonly the service layer is viewed as a single canonical thing (monolith). You could also break it into <em>x</em> pieces and distribute them (microservices).</p>
 
-        <img src="images/3tier_ecosystem.png" />
-        <h4 class="sectionNoteFigureDescription">Figure: Three-tier Web Application (Ecosystem)</h4>
-        <p>Commonly the service layer is viewed as a single canonical thing (monolith). You could also break it into <em>x</em> pieces and distribute them (microservices).</p>
-
-        <img src="images/3tier_benefit.png" />
-        <h4 class="sectionNoteFigureDescription">Figure: Three-tier Web Application (Scalability Benefit)</h4>
-        <p>Once benefit of the extra work for of creating the service tier is that you can scale each layer independently which can give you great deployment options in terms of location based caching and distribution.</p>
-    </div>
-</div>
+                    <img src="images/3tier_benefit.png" />
+                    <h4 class="sectionNoteFigureDescription">Figure: Three-tier Web Application (Scalability Benefit)</h4>
+                    <p>Once benefit of the extra work for of creating the service tier is that you can scale each layer independently which can give you great deployment options in terms of location based caching and distribution.</p>
+                </div>
+            </div>
+    </td>
+    </tr>
+</table>
 
      
 

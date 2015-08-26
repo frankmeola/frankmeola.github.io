@@ -3,7 +3,33 @@ body{
 	color:white;
 	font-family: 'Droid Sans', sans-serif;
 	line-height:1.5em;
-	background-image:url("../images/grid_bg_optimized.png");
+}
+
+.blueprintNotes{
+	border:1px solid white; 
+	border-radius:10px;
+}
+
+.blueprintTag {
+	padding:10px;
+}
+
+.blueprintSeperator{
+	border-bottom:1px solid white;
+}
+
+.blueprintRightSeperator{
+	border-right:1px solid white;
+}
+
+.blueprintMemo {
+	font-variant: small-caps;
+	font-size:10px;
+	margin-bottom:10px;
+}
+
+.blueprintInfo{
+	text-align:center;
 }
 
 img{
@@ -17,15 +43,12 @@ h1, h2, h3, h4, h5, h6{
 
 .innerContainer{
 	margin:20px;
-	border:1px solid white;
 	padding:20px;
+	border:1px solid white;
+	border-radius:25px;
 }
 
 .container{
-	background-color:#006DDE;
-	margin-top:2%;
-	margin-left:5%;
-	margin-right:5%;
 	border:1px solid white;
 }
 
