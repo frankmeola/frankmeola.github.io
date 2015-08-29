@@ -31,3 +31,9 @@ body{
 	line-height:3em;
 	font-weight:bold;
 }
+
+li{
+	padding:1em;
+	list-style: none;
+	border-bottom:1px solid grey;
+}

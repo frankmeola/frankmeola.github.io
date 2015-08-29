@@ -8,7 +8,7 @@
 	</head>
 	<body>
 	<!-- pageData is where the content you are paging show up -->
-	<div id="pagedData" style="text-align:center;height:200px;">
+	<div id="pagedData">
 	</div>
 	<div id="pager">
 		<a class="ghost-button previousPage" style="float:left;">
@@ -45,7 +45,10 @@
 				var seen = navigationData.Previous.Percentage*100;
 				var toSee = navigationData.Next.Percentage*100;
 
-				$('#pagedData').html('<h1>Content for page <br/>'+pagingInfo.CurrentPage+'</h1>');
+				var rows = '<ul>'+$.map(new Array(pagingInfo.ItemsPerPage), function(el, i){
+					return '<li>'+i+' Some info</li>';
+				}).join('')+'</ul>';
+				$('#pagedData').html('<h1>Content for page '+pagingInfo.CurrentPage+'</h1>' + rows);
 				
 				$('.previousPage .filled').attr("style", "margin-left:"+toSee+"%;width:"+seen+"%;");
 				$('.nextPage .filled').attr("style", "margin-left:"+seen+"%;width:"+toSee+"%;");
