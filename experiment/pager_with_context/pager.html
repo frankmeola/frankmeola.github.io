@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Mobile Friendly Pager Demo
+		</title>
+		<link href='pager.css' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+	<!-- pageData is where the content you are paging show up -->
+	<div id="pagedData" style="text-align:center;height:200px;">
+	</div>
+	<div id="pager">
+		<a class="ghost-button previousPage" style="float:left;">
+			<div class="filled">
+			</div>
+			<div class="content">&lsaquo;&nbsp;Previous</div>
+		</a>
+		<div class="present" style="float:left;text-align:center;margin-left: 2em;">
+			<strong><span class="currentPageReadonly"></span></strong>
+		</div>
+		<a class="ghost-button nextPage"  style="float:right;">
+			<div class="filled">
+			</div>
+			<div class="content">Next&nbsp;&rsaquo;</div>
+		</a>
+		<br clear="all"/>
+		<div class="pageRequest" style="width:100%;text-align:center;display:none;margin-top:1em;border-top:1px solid #000;padding-top:1.5em;">
+			<input type="text" size="2" class="currentPage"/> of <span class="totalPages"></span>
+			<a class="gotoPage">Go</a> 
+		</div>
+	</div>
+	<script src="jquery-2.1.4.min.js"></script>
+	<script src="paging.js"></script>
+	<script>	
+		$(document).ready(function(){
+			var totalPages = toInt(qs["totalPages"]) || 10;
+			var currentPage = ensureBetween(toInt(qs["currentPage"]), 0, totalPages) || 0;
+			
+			var paging = {ItemsPerPage:20, TotalPages:totalPages, CurrentPage:currentPage};
+			
+			var renderPager = function(pagingInfo){
+				console.log(pagingInfo);
+				var navigationData = navigation(pagingInfo);
+				var seen = navigationData.Previous.Percentage*100;
+				var toSee = navigationData.Next.Percentage*100;
+
+				$('#pagedData').html('<h1>Content for page <br/>'+pagingInfo.CurrentPage+'</h1>');
+				
+				$('.previousPage .filled').attr("style", "margin-left:"+toSee+"%;width:"+seen+"%;");
+				$('.nextPage .filled').attr("style", "margin-left:"+seen+"%;width:"+toSee+"%;");
+				
+				$('.currentPageReadonly').html(pagingInfo.CurrentPage);
+				$('.currentPage').val(pagingInfo.CurrentPage);
+				$('.gotoPage').attr("href", window.location.pathname+"?totalPages="+paging.TotalPages+"&currentPage="+pagingInfo.CurrentPage);
+				$('.totalPages').html(pagingInfo.TotalPages);
+				
+				var previousPage = pagingInfo.CurrentPage-1;
+				var nextPage = pagingInfo.CurrentPage+1;
+				$('.previousPage').attr("href", window.location.pathname+"?totalPages="+pagingInfo.TotalPages+"&currentPage="+previousPage);
+				$('.nextPage').attr("href", window.location.pathname+"?totalPages="+pagingInfo.TotalPages+"&currentPage="+nextPage);
+			};
+			
+			renderPager(paging);
+			
+			$('.present').click(function(){
+				$('.pageRequest').toggle();
+			});
+			
+			$('.currentPage').change(function(e){
+				var requestedPage = $(this).val();
+				$('.gotoPage').attr("href", window.location.pathname+"?totalPages="+paging.TotalPages+"&currentPage="+requestedPage);
+			});
+		});
+	</script>
+	</body>
+</html>

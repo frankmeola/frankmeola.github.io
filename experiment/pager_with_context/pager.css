@@ -1,0 +1,33 @@
+body{
+	font-family:Tahoma, Geneva, sans-serif;
+}
+
+.ghost-button {
+	height:50px;
+	width:40%;
+	margin-left:2em;
+	margin-right:2em;
+	color: #000;
+	border: 1px solid lightblue;
+	border-radius: 5px;
+	text-align: center;
+	outline: none;
+	text-decoration: none;
+	position: relative; 
+}
+
+.ghost-button:hover{
+	cursor:pointer;
+}
+
+.filled{
+	background-color:lightblue;
+	height:100%;
+	position: absolute; 
+	z-index:-1;
+}
+
+.content{
+	line-height:3em;
+	font-weight:bold;
+}
