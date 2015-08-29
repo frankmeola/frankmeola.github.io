@@ -17,7 +17,7 @@
 			</div>
 			<div class="content">&lsaquo;&nbsp;Previous</div>
 		</a>
-		<div class="present" style="float:left;text-align:center;margin-left: 2em;">
+		<div class="present" style="float:left;text-align:center;padding:1em;">
 			<strong><span class="currentPageReadonly"></span></strong>
 		</div>
 		<a class="ghost-button nextPage"  style="float:right;">
@@ -69,6 +69,7 @@
 			
 			$('.present').click(function(){
 				$('.pageRequest').toggle();
+				$('.currentPage').focus();
 			});
 			
 			$('.currentPage').change(function(e){
