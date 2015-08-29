@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Frank Meola | Mobile Friendly Paging</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Frank Meola">
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
+	
+    <!-- Bootstrap core CSS -->
+    <link href="../static/stylesheets/bootstrap.min.css" rel="stylesheet" >
+    <link href="../static/stylesheets/design.css" rel="stylesheet" >
+   
+    <script src="../static/javascripts/html5.js"></script>
+    <script src="../static/javascripts/respond.js"></script>
+		
+  </head>
+  <body>
+    
+    	<!-- NAV -->
+	<div class="bs-component">
+	  <div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="/"><img src="../static/images/logo_grey_transparent_75_40.png" border="0" style="padding:0;margin:0;"/></a>
+		</div>
+		<div class="navbar-collapse collapse navbar-inverse-collapse">
+		  <ul class="nav navbar-nav">
+			<li><a href="../index.html">Home</a></li>
+			<li><a href="../blog/index.html" title="Things I am coding, writing, or thinking.">Blog</a></li>
+			<li><a href="../inputstream/index.html" title="Things I am reading, watching, or reviewing.">Input Stream</a></li>
+			<li><a href="../about_me.html">About Me</a></li>
+			<li><a href="../contact_me.html">Contact Me</a></li>
+		  </ul>
+		</div>
+	</div> 
+
+	<div class="container">
+	
+
+<!--
+template = post
+title = Mobile Friendly Paging
+summary = Painless paging for mobile web browsing.
+head_image = /static/images/blog_media/Urval_av_de_bocker_som_har_vunnit_Nordiska_radets_litteraturpris_under_de_50_ar_som_priset_funnits_(3).jpg
+-->
+
+<div class="well">
+     <div class="row">
+            <div class="col-lg-3 col-lg-offset-3">
+                     <img src="/static/images/blog_media/Urval_av_de_bocker_som_har_vunnit_Nordiska_radets_litteraturpris_under_de_50_ar_som_priset_funnits_(3).jpg"/>
+                             <br/>
+                    Image courtesy of <a href="https://upload.wikimedia.org/wikipedia/commons/0/0a/Urval_av_de_bocker_som_har_vunnit_Nordiska_radets_litteraturpris_under_de_50_ar_som_priset_funnits_(3).jpg">Wikipedia</a>
+            </div>
+        </div>
+</div>
+
+<h1><strong>Mobile Friendly Paging: User Focused</strong></h1>
+
+<div class="post-tag-line">
+     <span class="label label-primary">UI</span>, <span class="label label-primary">UX</span>, <span class="label label-primary">Design</span>
+</div>
+
+<h2>Simplicity and Flexibility On A Small Screen</h2>
+
+<p>Web browsing on a mobile phone can sometimes feel spartan. There is not much room for extra info and getting it to line up and display nicely is not easy.</p>
+
+<p>One small and overlooked item has become a staple on most web sites - paging data. Whether you are searching or just going through content paging is one of the most common means of providing manageable chunks to scroll through.</p>
+
+<p>However, most paging felt lacking and limiting. You are either restricted to "next-ing" 20 times to get where you want or you keep "next-ing" and wonder how far until it ends. Either experience can be frustrating for users so I wanted to take a stab a designing something that would address the above concerns.</p>
+
+<p>Lets take look at how a few sites implement mobile paging and then see what how my design compares.</p>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Demo</h3>
+  </div>
+  <div class="panel-body">
+       <p>
+            If you can't wait and want to see what I came up with then you can try out the <a href="/experiment/pager_with_context/pager.html" target="blank">demo</a> and come back to see the reasoning behind it.
+       </p>
+  </div>
+</div>
+
+<h2>Pages and Pages of Quirky Pagers</h2>
+
+<p>Let's take a look at a few pagers on some popular sites and see how it shows up on my mobile device.</p>
+
+<p>Let's take a look at three examples of paging data and see what we find.</p>
+
+<h3>Google</h3>
+
+<p><img src="/static/images/blog_media/google_vertical_start.png" style="width:300px;height:auto;"/>
+<img src="/static/images/blog_media/google_vertical_inprogress.png" style="width:300px;height:auto;"/></p>
+
+<p><strong>Design Notes:</strong></p>
+
+<ul>
+<li>The next or previous button are hidden when they don't apply</li>
+<li>Provides some page numbers to allow non-sequential access to the <em>x</em> pages near the current page</li>
+<li>Links are straghtforward although smaller target to hit on mobile</li>
+<li>Indicates current page</li>
+<li>No indication of how many pages left</li>
+<li>Previous and Next are aligned left and right respectively</li>
+</ul>
+
+<h3>Reddit</h3>
+
+<p><img src="/static/images/blog_media/reddit_vertical_start.png" style="width:300px;height:auto;"/>
+<img src="/static/images/blog_media/reddit_vertical_inprogress.png" style="width:300px;height:auto;"/></p>
+
+<p><strong>Design Notes:</strong></p>
+
+<ul>
+<li>The next or previous button are hidden when they don't apply</li>
+<li>Buttons are relatively small sized making them smaller targets to hit</li>
+<li>No indication of what page we are on</li>
+<li>No indication of how many pages left</li>
+<li>Previous and Next are aligned left and right respectively</li>
+</ul>
+
+<h3>InfoQ</h3>
+
+<p><img src="/static/images/blog_media/infoq_vertical_start.png" style="width:300px;height:auto;"/>
+<img src="/static/images/blog_media/infoq_vertical_inprogress.png" style="width:300px;height:auto;"/></p>
+
+<p><strong>Design Notes:</strong></p>
+
+<ul>
+<li>The next or previous button are shown as disabled when they don't apply</li>
+<li>Buttons are nice large targets for mobile</li>
+<li>No indication of what page we are on</li>
+<li>No indication of how many pages left</li>
+<li>Indicates how many items per page</li>
+<li>Previous and Next are aligned left and right respectively</li>
+</ul>
+
+<h2>What I Came Up With</h2>
+
+<p>Here's what I set out to accomplish with my design:</p>
+
+<ul>
+<li>Indicate how much content is remaining</li>
+<li>Indicate how much content I have seen</li>
+<li>Buttons should be nice large targets for mobile</li>
+<li>Indicate what page we are on</li>
+<li>Previous and Next are aligned left and right respectively</li>
+<li>Be able to navigate non-sequentially</li>
+</ul>
+
+<h3>Starting Out</h3>
+
+<p><img src="/static/images/blog_media/pager_vertical_start.png" style="width:300px;height:auto;"/></p>
+
+<p>When we are on the first page we haven't seen any content yet so only the next button is filled. Right now we sort of look like the InfoQ example and the user might just think the previous button is disabled and the next button is the active primary.</p>
+
+<h3>Next Page Please</h3>
+
+<p><img src="/static/images/blog_media/pager_vertical_inprogress_1.png" style="width:300px;height:auto;"/></p>
+
+<p>Now that we are a page in we have seen a certain portion of the available content. The previous button now represents the amount of content we have seen while the next button shows the remaining amount. This gives the user a sense of space and let's them know where they are in the content.</p>
+
+<h3>Halfway There</h3>
+
+<p><img src="/static/images/blog_media/pager_vertical_inprogress_5.png" style="width:300px;height:auto;"/></p>
+
+<p>Hooray, we have seen half the content and the next and previous buttons graphically represent it.</p>
+
+<h3>Jump Around</h3>
+
+<p><img src="/static/images/blog_media/pager_vertical_go_to_page.png" style="width:300px;height:auto;"/></p>
+
+<p>Maybe we want to pick up where we left off or we want to skip towards the end. We can support all sorts of requests by letting the user enter which page they want by clicking on the current page in between the previous and next.</p>
+
+<h3>The End Is In Sight</h3>
+
+<p><img src="/static/images/blog_media/pager_vertical_inprogress_9.png" style="width:300px;height:auto;"/></p>
+
+<p>We are on the next to last page and can easily see how far we have come. Much like a gas gauge or other familiar representation we can see that the next button is almost "empty".</p>
+
+<h3>Endings Are Another Beginning</h3>
+
+<p><img src="/static/images/blog_media/pager_vertical_finished.png" style="width:300px;height:auto;"/></p>
+
+<p>Congratulations, we finally saw all the content. The next button now looks disabled since there is no more content.</p>
+
+<h3>Wrapup</h3>
+
+<p>While this solution maynot be the best fit for all cases I think it can help provide context to the user while paging through data. It can also help when walking through a wizard-like interface to graphically show what portion of the steps are remaining versus completed. It could also be used in ebook or other written content to visually indicate progress in a chapter.</p>
+
+<p>The design achieves the original goals and in the end is pretty simple to implement either on the client side or server side. </p>
+
+<p>Try and out and let me know what you think.</p>
+
+
+<br/><hr />
+<div id="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function() {
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+     
+	</div>
+			
+    <!-- FOOTER -->
+<div class="container">
+    <footer>
+        <p style="text-align:center;">Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way.</p>
+        <p class="pull-left">&copy; 2015 Frank Meola</p>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+    </footer>
+</div>
+    
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../static/javascripts/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-48719044-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	
+	<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    <script>
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+           var msViewportStyle = document.createElement('style')
+           msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'))
+           document.querySelector('head').appendChild(msViewportStyle)
+        }
+    </script>
+
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+  </body>
+</html>
