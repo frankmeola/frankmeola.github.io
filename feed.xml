@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>Frank Meola - Blog</title>
+    <link>http://frankmeola.github.io/</link>
+    <description>Frank Meola Blog</description>
+    <item>
+      <title>Hello world</title>
+      <link>http://frankmeola.github.io/blog/2014-3-5-hello-world.html</link>
+      <description>It's customary that a new blog developer is christened with a hello world post. This one is no different.</description>
+      <pubDate>Wed, 05 Mar 2014 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2014-3-5-hello-world.html</guid>
+    </item><item>
+      <title>Bypass Line</title>
+      <link>http://frankmeola.github.io/blog/2014-3-10-bypass-line.html</link>
+      <description>Systems and components fail. Be ready. Be resilient.</description>
+      <pubDate>Mon, 10 Mar 2014 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2014-3-10-bypass-line.html</guid>
+    </item><item>
+      <title>XML Minifier</title>
+      <link>http://frankmeola.github.io/blog/2014-3-12-xml-minifier.html</link>
+      <description>Shrink your XML for storage and bandwidth savings. Also makes a great mug warmer.</description>
+      <pubDate>Wed, 12 Mar 2014 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2014-3-12-xml-minifier.html</guid>
+    </item><item>
+      <title>Data Rascals: Contiguous Data</title>
+      <link>http://frankmeola.github.io/blog/2014-3-17-data-rascal-contiguous-data.html</link>
+      <description>Every system has a wily rascal data structure that needs a little extra help. In this post we'll see how to tame a tricky list and discover a general way of dealing with ranges.</description>
+      <pubDate>Mon, 17 Mar 2014 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2014-3-17-data-rascal-contiguous-data.html</guid>
+    </item><item>
+      <title>Book Review: Release It!</title>
+      <link>http://frankmeola.github.io/inputstream/2014-3-26-book-review-releaseit.html</link>
+      <description>Book Review: Release It!</description>
+      <pubDate>Wed, 26 Mar 2014 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/inputstream/2014-3-26-book-review-releaseit.html</guid>
+    </item><item>
+      <title>User Activity Measurements - Part One</title>
+      <link>http://frankmeola.github.io/blog/2014-4-3-user-activity-measurements-part-one.html</link>
+      <description>You spent countless hours obsessing over minute details and micro-optimizing the code. Why stop the feedback and fun now that it's in production?</description>
+      <pubDate>Thu, 03 Apr 2014 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2014-4-3-user-activity-measurements-part-one.html</guid>
+    </item><item>
+      <title>Sculpt Your Code in a REPL - Part One</title>
+      <link>http://frankmeola.github.io/blog/2014-4-28-sculpt-your-code-in-a-repl-part-one.html</link>
+      <description>REPLs are great and F# is a concise expressive language. Let's see if we can use each to make the other better.</description>
+      <pubDate>Mon, 28 Apr 2014 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2014-4-28-sculpt-your-code-in-a-repl-part-one.html</guid>
+    </item><item>
+      <title>Sculpt Your Code in a REPL - Part Two</title>
+      <link>http://frankmeola.github.io/blog/2014-4-30-sculpt-your-code-in-a-repl-part-two.html</link>
+      <description>Pencils down. Let's compare notes and see what a REPL-friendly experiment api would look like.</description>
+      <pubDate>Wed, 30 Apr 2014 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2014-4-30-sculpt-your-code-in-a-repl-part-two.html</guid>
+    </item><item>
+      <title>Sculpt Your Code in a REPL - Part Three</title>
+      <link>http://frankmeola.github.io/blog/2014-5-1-sculpt-your-code-in-a-repl-part-three.html</link>
+      <description>Let's wrap this REPL experiment up with a look to future enhancement possibilities.</description>
+      <pubDate>Thu, 01 May 2014 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2014-5-1-sculpt-your-code-in-a-repl-part-three.html</guid>
+    </item><item>
+      <title>A Functional Architecture with F# by Mark Seemann</title>
+      <link>http://frankmeola.github.io/inputstream/2014-5-29-fsharp-architecture.html</link>
+      <description>A Functional Architecture with F# by Mark Seemann</description>
+      <pubDate>Thu, 29 May 2014 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/inputstream/2014-5-29-fsharp-architecture.html</guid>
+    </item><item>
+      <title>What a Racket</title>
+      <link>http://frankmeola.github.io/inputstream/2014-5-31-what-a-racket.html</link>
+      <description>What a Racket</description>
+      <pubDate>Sat, 31 May 2014 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/inputstream/2014-5-31-what-a-racket.html</guid>
+    </item><item>
+      <title>Why so mean?</title>
+      <link>http://frankmeola.github.io/blog/2014-6-1-why-so-mean.html</link>
+      <description>Don't change anything. Change everything.</description>
+      <pubDate>Sun, 01 Jun 2014 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2014-6-1-why-so-mean.html</guid>
+    </item><item>
+      <title>Red meat. Grill. Recliner.</title>
+      <link>http://frankmeola.github.io/blog/2014-7-17-red-meat-grill-refactor.html</link>
+      <description>Software in the summer.</description>
+      <pubDate>Thu, 17 Jul 2014 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2014-7-17-red-meat-grill-refactor.html</guid>
+    </item><item>
+      <title>From Here to There. Together.</title>
+      <link>http://frankmeola.github.io/blog/2015-4-13-from-here-to-there.html</link>
+      <description>Feeling lost in a meeting? You're not the only one. Try this technique to navigate back to solid ground.</description>
+      <pubDate>Mon, 13 Apr 2015 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2015-4-13-from-here-to-there.html</guid>
+    </item><item>
+      <title>Reuse in the Enterprise</title>
+      <link>http://frankmeola.github.io/blog/2015-4-15-reuse-in-the-enterprise.html</link>
+      <description>Borrowing lessons from the software industry to simplify enterprise software reuse.</description>
+      <pubDate>Wed, 15 Apr 2015 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2015-4-15-reuse-in-the-enterprise.html</guid>
+    </item><item>
+      <title>Circuit Breaker Visualizer</title>
+      <link>http://frankmeola.github.io/blog/2015-6-2-circuit-breaker-visualization.html</link>
+      <description>Visualize your circuit breaker.</description>
+      <pubDate>Tue, 02 Jun 2015 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2015-6-2-circuit-breaker-visualization.html</guid>
+    </item><item>
+      <title>JavaScript Performance Analysis And The Mutating Interface: Part One</title>
+      <link>http://frankmeola.github.io/blog/2015-7-25-javascript-performance-analysis-and-the-mutating-interface-part-one.html</link>
+      <description>Data beats guessing when performance issues arise.</description>
+      <pubDate>Sat, 25 Jul 2015 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2015-7-25-javascript-performance-analysis-and-the-mutating-interface-part-one.html</guid>
+    </item><item>
+      <title>JavaScript Performance Analysis And The Mutating Interface: Part Two</title>
+      <link>http://frankmeola.github.io/blog/2015-7-26-javascript-performance-analysis-and-the-mutating-interface-part-two.html</link>
+      <description>Now that we fixed the production issue let's experiment with JavaScript and interfaces.</description>
+      <pubDate>Sun, 26 Jul 2015 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2015-7-26-javascript-performance-analysis-and-the-mutating-interface-part-two.html</guid>
+    </item><item>
+      <title>Mobile Friendly Paging</title>
+      <link>http://frankmeola.github.io/blog/2015-8-29-mobile-friendly-paging.html</link>
+      <description>Painless paging for mobile web browsing.</description>
+      <pubDate>Sat, 29 Aug 2015 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2015-8-29-mobile-friendly-paging.html</guid>
+    </item><item>
+      <title>Towards Mastery</title>
+      <link>http://frankmeola.github.io/inputstream/2016-2-5-towards-mastery.html</link>
+      <description>Towards Mastery</description>
+      <pubDate>Fri, 05 Feb 2016 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/inputstream/2016-2-5-towards-mastery.html</guid>
+    </item><item>
+      <title>Tunnel Vision</title>
+      <link>http://frankmeola.github.io/blog/2016-2-5-tunnel-vision.html</link>
+      <description>Sometimes we're not even aware that we are stuck in a rut with wheels spinning. With a little awareness and a push we can move forward.</description>
+      <pubDate>Fri, 05 Feb 2016 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2016-2-5-tunnel-vision.html</guid>
+    </item><item>
+      <title>Book Review: Passionate Programmer</title>
+      <link>http://frankmeola.github.io/inputstream/2016-3-10-book-review-passionate-programmer.html</link>
+      <description>Book Review: Passionate Programmer</description>
+      <pubDate>Thu, 10 Mar 2016 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/inputstream/2016-3-10-book-review-passionate-programmer.html</guid>
+    </item><item>
+      <title>Keep Your Pencil Light</title>
+      <link>http://frankmeola.github.io/blog/2017-1-12-keep-your-pencil-light.html</link>
+      <description>Start somewhere and keep moving.</description>
+      <pubDate>Thu, 12 Jan 2017 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2017-1-12-keep-your-pencil-light.html</guid>
+    </item>
+  </channel>
+</rss>
