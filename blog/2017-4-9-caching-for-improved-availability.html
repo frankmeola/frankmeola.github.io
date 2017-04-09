@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Frank Meola | Caching for Improved Availability</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Frank Meola">
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+	
+    <!-- Bootstrap core CSS -->
+    <link href="/static/stylesheets/bootstrap.min.css" rel="stylesheet" >
+    <link href="/static/stylesheets/design.css" rel="stylesheet" >
+   
+    <script src="/static/javascripts/html5.js"></script>
+    <script src="/static/javascripts/respond.js"></script>
+		
+  </head>
+  <body>
+    	<!-- NAV -->
+	<div class="bs-component">
+	  <div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="/"><img src="/static/images/logo_grey_transparent_75_40.png")" border="0" style="padding:0;margin:0;"/></a>
+		</div>
+		<div class="navbar-collapse collapse navbar-inverse-collapse">
+		  <ul class="nav navbar-nav">
+			<li><a href="/index.html">Home</a></li>
+			<li><a href="/blog/index.html" title="Things I am coding, writing, or thinking.">Blog</a></li>
+			<li><a href="/inputstream/index.html" title="Things I am reading, watching, or reviewing.">Input Stream</a></li>
+			<li><a href="/about_me.html">About Me</a></li>
+			<li><a href="/contact_me.html">Contact Me</a></li>
+		  </ul>
+		</div>
+	</div> 
+
+
+	<div class="container">
+	
+
+<!--
+template = post
+title = Caching for Improved Availability
+summary = Can a cache improve your site availability? It depends.
+head_image = /static/images/blog_media/Common_goldfish.JPG
+-->
+
+<div class="well">
+     <div class="row">
+            <div class="col-lg-3 col-lg-offset-3">
+                     <img src="/static/images/blog_media/Common_goldfish.JPG"/>
+                             <br/>
+                    Image courtesy of <a href="https://commons.wikimedia.org/wiki/File:Common_goldfish.JPG">Wikimedia Commons</a>
+            </div>
+        </div>
+</div>
+
+<h1><strong>Caching for Improved Availability</strong></h1>
+
+<div class="post-tag-line">
+     <span class="label label-primary">Operations</span>, <span class="label label-primary">Uptime</span>
+</div>
+
+<h2>What's upstream flows downhill</h2>
+
+<p>The saying <a href="https://web.cs.dal.ca/~johnston/poetry/island.html">"No man is an island entire of itself"</a> also applies to the systems we build. From the simplest website to the most complicated enterprise architecture every system has upstream dependencies and those dependencies carry the possibility of failing. When upstream dependencies fail those downstream are affected ultimately dumping the problem on the end user.</p>
+
+<p>The question is do downstream dependencies have to fail or can we mitigate the issue somehow?</p>
+
+<h2>Let's get specific</h2>
+
+<p>To jump write to the code take a look at <a href="https://gist.github.com/frankmeola/fb5714f0a05935b6f10895642d2c85ab">sample code in Python</a>.</p>
+
+<p>Let's take a look at a specific example. Let's say we have a website that talks to a backend service. The service could be ours or a third party or even a database. The website provides information to the user and in our case there is no degraded experience we can present to the user if the service doesn't respond.</p>
+
+<p><img src="/static/images/blog_media/cache_availability_basic_setup.png" alt="Basic Setup" /></p>
+
+<p>In this example the website talks directly to the backend using the default "call and reply" style. Yes there are other strategies to reduce the coupling between these systems but that's not what we are talking about today. The system is already built so rewriting everything in a new architecture for this issue is overkill. </p>
+
+<h2>What could go wrong?</h2>
+
+<p>The way it works today when the backend service goes down then the website will throw an error the next time it tries to call the service. Maybe the error is being handled somehow and a slightly more user-friendly message is shown but it still means the user is looking at an error until the backend service is restored. Now you could point your users to the SLA agreement the backend service so helpfully provides but it probably won't make them any happier since they came to use your website not to play uptime police. </p>
+
+<p>Let's take look at how the default caching strategy could help improve things.</p>
+
+<h2>Time based caching</h2>
+
+<p>By default most caches provide time based expiration. The internals are different per cache implementation by this is the cache expiration policy of least resistance. Stick something in the cache and give it a seemingly reasonable expiration, say 1 hour, and move onto the next story in the backlog.</p>
+
+<p>So what happens when the backend service goes down with your caching strategy in place?</p>
+
+<h2>Time bomb</h2>
+
+<p>Now the website has a time bomb. Since we don't know when the data was cached we don't know when it will timeout. If the backend service doesn't come back up before the cached data expires then we have just delayed the exploding error.</p>
+
+<p><img src="/static/images/blog_media/cache_availability_time_bomb.png" alt="Time Bomb" /></p>
+
+<p>For all we know there was 1 minute left before cache expiration when the backend service went down. The only thing we gain using this strategy is a false sense of security.</p>
+
+<h2>Version based caching</h2>
+
+<p>Odds are you are already familiar with version based cache expiration. Every modern web browser has advanced caching based on both versioning and timeouts. Basically instead of blindly expiring and throwing away what we currently have in the cache we can check to see if a new version exists. If it does then put that one in the cache otherwise keep using what we already have cached. This is a more complicated expiration policy but more realistic for most systems. </p>
+
+<p>By letting the website control the cache expiration we give it the ability to continue operation with stale information until the backend service comes back online. </p>
+
+<h2>Wrapup</h2>
+
+<p>Try out the <a href="https://gist.github.com/frankmeola/fb5714f0a05935b6f10895642d2c85ab">python and flask example</a> and see how it works. </p>
+
+<p>Version based cache expiration makes sense in this context so it might be worth giving it a shot. Systems fail all the time so it's more a matter of being prepared to handle the failure gracefully than trying to stop all possibility of failure. </p>
+
+<p>Good luck and happy caching!</p>
+
+
+<br/><hr />
+<div id="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function() {
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+     
+	</div>
+			
+    <!-- FOOTER -->
+<div class="container">
+    <footer>
+        <p style="text-align:center;">Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way.</p>
+        <p class="pull-left">&copy; 2017 Frank Meola</p>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+    </footer>
+</div>
+    
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/static/javascripts/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-48719044-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	
+	<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    <script>
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+           var msViewportStyle = document.createElement('style')
+           msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'))
+           document.querySelector('head').appendChild(msViewportStyle)
+        }
+    </script>
+
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+  </body>
+</html>

@@ -154,6 +154,18 @@
       <description>Book Review: Becoming a Technical Leader</description>
       <pubDate>Thu, 02 Feb 2017 00:00:00 GMT</pubDate>
       <guid>http://frankmeola.github.io/inputstream/2017-2-2-becoming-a-tech-leader.html</guid>
+    </item><item>
+      <title>Book Review: Managing Humans</title>
+      <link>http://frankmeola.github.io/inputstream/2017-4-9-managing-humans.html</link>
+      <description>Book Review: Managing Humans</description>
+      <pubDate>Sun, 09 Apr 2017 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/inputstream/2017-4-9-managing-humans.html</guid>
+    </item><item>
+      <title>Caching for Improved Availability</title>
+      <link>http://frankmeola.github.io/blog/2017-4-9-caching-for-improved-availability.html</link>
+      <description>Can a cache improve your site availability? It depends.</description>
+      <pubDate>Sun, 09 Apr 2017 00:00:00 GMT</pubDate>
+      <guid>http://frankmeola.github.io/blog/2017-4-9-caching-for-improved-availability.html</guid>
     </item>
   </channel>
 </rss>
