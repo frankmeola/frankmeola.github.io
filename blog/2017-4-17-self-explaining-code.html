@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Frank Meola | Self-Explaining Code</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Frank Meola">
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+	
+    <!-- Bootstrap core CSS -->
+    <link href="/static/stylesheets/bootstrap.min.css" rel="stylesheet" >
+    <link href="/static/stylesheets/design.css" rel="stylesheet" >
+   
+    <script src="/static/javascripts/html5.js"></script>
+    <script src="/static/javascripts/respond.js"></script>
+		
+  </head>
+  <body>
+    	<!-- NAV -->
+	<div class="bs-component">
+	  <div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="/"><img src="/static/images/logo_grey_transparent_75_40.png")" border="0" style="padding:0;margin:0;"/></a>
+		</div>
+		<div class="navbar-collapse collapse navbar-inverse-collapse">
+		  <ul class="nav navbar-nav">
+			<li><a href="/index.html">Home</a></li>
+			<li><a href="/blog/index.html" title="Things I am coding, writing, or thinking.">Blog</a></li>
+			<li><a href="/inputstream/index.html" title="Things I am reading, watching, or reviewing.">Input Stream</a></li>
+			<li><a href="/about_me.html">About Me</a></li>
+			<li><a href="/contact_me.html">Contact Me</a></li>
+		  </ul>
+		</div>
+	</div> 
+
+
+	<div class="container">
+	
+
+<!--
+template = post
+title = Self-Explaining Code
+summary = Code should be self-documenting but can it also be self-explaining?
+head_image = /static/images/blog_media/chicken_mirror.jpg
+-->
+
+<div class="well">
+     <div class="row">
+            <div class="col-lg-3 col-lg-offset-3">
+                     <img src="/static/images/blog_media/chicken_mirror.jpg"/>
+                             <br/>
+                    Image courtesy of <a href="https://www.flickr.com/photos/jondissed/149892169280">Jonathan Lidbeck</a> </div>
+        </div>
+</div>
+
+<h1><strong>Self-Explaining Code</strong></h1>
+
+<div class="post-tag-line">
+     <span class="label label-primary">Debugging</span>, <span class="label label-primary">Design</span>
+</div>
+
+<h2>What Just Happened?</h2>
+
+<p>Ever see that classic scene is a movie where the main character is trying to impress someone at a restaurant and the waitress comes back to the table only to make a big show of cutting up his credit card? And when prompted why she cut it up the waitress responds "I don't know. The machine only said to cut up the card." That scene signals either the start or a very poignant event during a downward spiral for the character. It signifies the character's loss of control and the journey to the bottom so they can overcome things later. </p>
+
+<p>Now imagine that feeling happening to your users every time they try to use your software. When they are confronted with something that doesn't match their expectation they feel a loss of control at the situation. Now when they call you for support they are upset and dealing with some uncomfortable feelings. And the situation starts all over when the customer service rep tries to use the internal system to view the customers info and feels a similar loss of control when they can't explain why the info is not matching what is expected.</p>
+
+<p>The systems we build impact people and their emotional state constantly. As a software developer you are occasionally brought in to help explain the discrepancies. This often leads to users placing their frustration on us as we act as a proxy for the system. Maybe instead of spending time on production support we can help the software grow up and answer for itself.</p>
+
+<h2>When I Was A Child</h2>
+
+<p>The default mode for current software systems is that of a toddler. You can ask it a question or tell it to do something but when you ask it why it gave the answer it did it doesn't know. Or answers "because".</p>
+
+<p>Let's look at a concrete example of something everyone loves. Below is a screen for a loan repayment website. </p>
+
+<p><img src="/static/images/blog_media/sec_loan_history.png" alt="Loan Repayment UI" /></p>
+
+<p>Spot the problem yet? </p>
+
+<p>The outstanding loan amount is still $950 despite having made 3 $25 payments. The user would obviously be upset and might call our customer support to find out why they still owe $950 instead of $925. If you don't think this is a problem then add zeros to the end of all the number until you get uncomfortable.</p>
+
+<p>Here is the code for that screen.</p>
+
+<script src="https://gist.github.com/frankmeola/54d579fe44e98fd16b04167723b537de.js?file=standard_website.py"></script>
+
+<script src="https://gist.github.com/frankmeola/54d579fe44e98fd16b04167723b537de.js?file=loan_repayments.html"></script>
+
+<p>Now this example is specifically naive but for the most part this is standard code. Control flow and looping were the developer's main concerns and making it work was the definition of done.</p>
+
+<p>When brought in to explain what the code is doing the developer might wave his hands and talk about the posted status flag or some other technical view of the business domain. And that's great that we got the answer for the user but that whole process was expensive and provided a terrible customer service experience.</p>
+
+<h2>I Put Away Childish Things</h2>
+
+<p>The root of the problem is that the software has no concept of what it is doing. It is acting purely as programmed and provides no explanation when things go into unexpected territory. As the demands on systems have grown we still find ourselves building them out of the same control flow and logic statements. Let's take a look at an extremely simple example of having the system grow up a bit.</p>
+
+<script src="https://gist.github.com/frankmeola/54d579fe44e98fd16b04167723b537de.js?file=self_explaining_website.py"></script>
+
+<p>Now when the querystring why=True is sent to the page the code will execute that provides an explanation of what it is doing. The explanations are then attached to the result and in this case displayed on the page along with the loan data. </p>
+
+<p>The UI now looks like:</p>
+
+<p><img src="/static/images/blog_media/sec_loan_history_explain.png" alt="Loan Repayment UI" /></p>
+
+<p>Now we can see that the transaction on 4/14 hasn't posted so it won't affect the balance. You might say we should have just added the transaction status to the interface so the user could see that for themselves but that's not the point. It's not always possible or useful for the UI to display all data involved in a decision. There's a reason that your bank account balance is one field on the page and not a list of transaction that you have to add up for yourself. This example is a bit contrived but I bet you can think of at least one time when you wished you could ask a service what the heck it was doing in stead of trying to play detective with the code on one monitor and the bug report screen shot on the other. </p>
+
+<h2>Isn't This Just Good Logging?</h2>
+
+<p>Yes. This example was built from with constraints in mind. First it required no changes to the language or runtime. Second it had to be lightweight and somewhat performant. Third previous experiences influence future ideas so yes it looks like familiar logging code. The difference here is that instead of tucking it into some obscure file and making you find a way to correlate it based on time or user id it is returned with the call you make. This makes troubleshooting much simpler since you don't have to have a way to get a file off a production server or entries from a database. It also saves you from complicated correlation. </p>
+
+<p>And it doesn't just help in production. Imagine if a failing test printed out the explanation for the request instead of a cryptic "975 does not equal 950". Imagine if the compiler could raise an error that there was no explanation for PENDING transactions and that the system would not be able to explain how it handles them. If this concept was built into the language and runtime itself then we start to get closer to Leslie Lamport's specifications and reasoning about systems.</p>
+
+<h2>Just The Beginning</h2>
+
+<p>The example above is really just a start. It's a poke at the current state of systems that do what they are told but tell us nothing about why they do it. It happened to be a web UI in this case but it could also apply to troubleshooting a misbehaving car brake or a closed source tractor's software. Software needs to be more transparent and self explaining. There need to be more options than saying it's a black box or you can read the source if you want.</p>
+
+<p>Let's help software grow up. </p>
+
+
+<br/><hr />
+<div id="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function() {
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+     
+	</div>
+			
+    <!-- FOOTER -->
+<div class="container">
+    <footer>
+        <p style="text-align:center;">Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way.</p>
+        <p class="pull-left">&copy; 2017 Frank Meola</p>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+    </footer>
+</div>
+    
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/static/javascripts/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-48719044-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	
+	<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    <script>
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+           var msViewportStyle = document.createElement('style')
+           msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'))
+           document.querySelector('head').appendChild(msViewportStyle)
+        }
+    </script>
+
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+  </body>
+</html>
