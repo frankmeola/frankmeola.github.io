@@ -98,3 +98,11 @@ footer {
 .inputstream-title{
 	font-size:32px;
 }
+
+.blog-post-index-summary{
+    margin-top:1em;
+}
+
+.blog-post-index-publishdate{
+    font-weight:bold;
+}
