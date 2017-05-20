@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Show Time</title>
+
+        <style type="text/css">
+        body, html {
+          font-family: sans-serif;
+        }
+
+        #visualization{
+            padding-left:1em;
+            padding-right:1em;
+        }
+
+        .eventEntry{
+            margin-top:2em;
+        }
+
+        .timelineControls{
+            margin-top:2em;
+            margin-bottom:2em;
+        }
+
+        .timelineTitle{
+            text-align:center;
+        }
+
+        input{ 
+            width:100%;
+        }
+        </style>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.css" rel="stylesheet" type="text/css" />
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+
+        <!-- CSS Reset -->
+        <link rel="stylesheet" href="https://cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+
+        <!-- Milligram CSS minified -->
+        <link rel="stylesheet" href="https://cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="column">
+                    <div class="timelineControls">
+                        <button id="zoomOut" class="button button-clear">Zoom Out</button>
+                        <button id="zoomIn" class="button button-clear">Zoom In</button>
+                        <button id="resetData" class="button button-outline float-right">Clear Data</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="timelineTitle">
+            <h1 contenteditable="true">Series of Events</h1>
+        </div>
+        <div id="visualization"></div>
+        <div class="container">
+
+            <div class="row">
+                <div class="column">
+                    <div class="eventEntry">
+                        <table>
+                            <thead><tr><th>Date</th><th>Event</th></tr></thead>
+                            <tbody id="eventList"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    <script type="text/javascript">
+        // DOM element where the Timeline will be attached
+        var container = document.getElementById('visualization');
+
+        // Create a DataSet (allows two way data-binding)
+        var items = new vis.DataSet([]);
+
+        // Configuration for the Timeline
+        var options = {};
+
+        // Create a Timeline
+        var timeline = new vis.Timeline(container, items, options);
+
+        var ui = {
+            byId : function(id){ return document.getElementById(id); }, 
+            on : function(el, evt, handler){ el.addEventListener(evt, handler); }
+        };
+
+        var parseEvents = function(){
+            items.clear();
+            var rows = ui.byId('eventList').rows;
+            
+            for (var i=0; i<rows.length; i++) {
+                var start = ui.byId('date_'+i).value;
+                var content = ui.byId('event_'+i).value;
+
+                var item = {content:content, start:start};
+                if(start && content){
+                    items.add(item);
+                }
+            }
+        }; 
+
+        var bindControls = function(){
+
+            ui.on(ui.byId('zoomOut'), 'click', function(i){
+                timeline.zoomOut(1);
+            });
+
+            ui.on(ui.byId('zoomIn'), 'click', function(i){
+                timeline.zoomIn(1);
+            });
+
+            ui.on(ui.byId('resetData'), 'click', function(i){
+                items.clear();
+                localStorage.clear();
+                document.querySelectorAll('input').forEach(function(x){
+                    x.value = '';
+                });
+                document.querySelector('.timelineTitle h1').innerText = 'Series of Events';
+            });
+
+        };
+
+        var createInputs = function(elId, numRows){
+            for(var i=0; i <= numRows; i++){
+                var row = ui.byId(elId).insertRow(-1);
+                if(i === numRows){
+                    row.insertCell(-1).innerHTML = "<input class='lastRow' id='date_"+i +"'/>";
+                    row.insertCell(-1).innerHTML = "<input class='lastRow' id='event_"+i +"'/>";
+                }
+                else{
+                    row.insertCell(-1).innerHTML = "<input id='date_"+i +"'/>";
+                    row.insertCell(-1).innerHTML = "<input id='event_"+i +"'/>";
+                }
+            }
+        };
+
+        var addRow = function(elId){
+            document.querySelectorAll('#'+elId+' input').forEach(function(i){
+                i.className = '';
+            });
+            var row = ui.byId(elId).insertRow(-1);
+            var max = ui.byId(elId).rows.length-1;
+            row.insertCell(-1).innerHTML = "<input class='lastRow' id='date_"+max +"'/>";
+            row.insertCell(-1).innerHTML = "<input class='lastRow' id='event_"+max+"'/>";
+            bindInputEvents();
+        };
+
+        var bindInputEvents = function(){
+
+            ui.on(document.querySelector('.timelineTitle h1'), 'blur', function(i){
+                    localStorage['timelineTitle'] = i.target.innerText;
+            });
+
+            document.querySelectorAll('input').forEach(function(x){
+                ui.on(x, 'blur', function(i){
+                    localStorage[i.target.id] = i.target.value;
+                    parseEvents();
+                }, false)
+            });
+
+            document.querySelectorAll('input').forEach(function(x){
+                ui.on(x, 'focus', function(i){
+                    i.target.value = localStorage[i.target.id] || "";
+                    if(this.className === 'lastRow'){
+                        addRow('eventList');
+                    }
+                }, false)
+            });
+
+            document.querySelectorAll('input').forEach(function(x){
+                ui.on(x, 'blur', function(i){
+                    localStorage[i.target.id] = i.target.value;
+                    parseEvents();
+                }, false)
+            });
+
+        };
+            
+        var loadSavedData = function(elId){
+            document.querySelector('.timelineTitle h1').innerText = localStorage['timelineTitle'] || "Series of Events";
+
+            var rows = ui.byId(elId).rows;
+            for(var i=0; i < rows.length; i++){
+                var dateInput = rows[i].cells[0].getElementsByTagName('input')[0];
+                var eventInput = rows[i].cells[1].getElementsByTagName('input')[0];
+                if(localStorage[dateInput.id] || localStorage[eventInput.id]){
+                    dateInput.focus();
+                    eventInput.focus();
+                }
+            }
+        };
+
+        bindControls();
+        createInputs('eventList', 3);
+        bindInputEvents();
+        loadSavedData('eventList');
+    </script>
+    </body>
+</html>
+

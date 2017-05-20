@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Frank Meola | Show Time</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Frank Meola">
+
+        <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@frank_meola" />
+    <meta name="twitter:title" content="Show Time" />
+    <meta name="twitter:description" content="Events aren&#39;t text. They happen over time. Show Time is a quick and simple timeline creator." />
+    <meta name="twitter:image" content="http://frankmeola.github.io/static/images/blog_media/timeline_header.png" />
+
+
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+	
+    <!-- Bootstrap core CSS -->
+    <link href="/static/stylesheets/bootstrap.min.css" rel="stylesheet" >
+    <link href="/static/stylesheets/design.css" rel="stylesheet" >
+   
+    <script src="/static/javascripts/html5.js"></script>
+    <script src="/static/javascripts/respond.js"></script>
+		
+  </head>
+  <body>
+    	<!-- NAV -->
+	<div class="bs-component">
+	  <div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="/"><img src="/static/images/logo_grey_transparent_75_40.png")" border="0" style="padding:0;margin:0;"/></a>
+		</div>
+		<div class="navbar-collapse collapse navbar-inverse-collapse">
+		  <ul class="nav navbar-nav">
+			<li><a href="/index.html">Home</a></li>
+			<li><a href="/blog/index.html" title="Things I am coding, writing, or thinking.">Blog</a></li>
+			<li><a href="/inputstream/index.html" title="Things I am reading, watching, or reviewing.">Input Stream</a></li>
+			<li><a href="/about_me.html">About Me</a></li>
+			<li><a href="/contact_me.html">Contact Me</a></li>
+		  </ul>
+		</div>
+	</div> 
+
+
+	<div class="container">
+	
+
+    <div class="well">
+         <div class="row">
+                <div class="col-lg-3 col-lg-offset-3" >
+                         <img src="/static/images/blog_media/timeline_header.png" style="max-width:300px;height:auto;"/>
+                    <p> 
+                        Image courtesy of <a href="">Me</a>
+                    </p>
+                </div>
+            </div>
+    </div>
+
+<h1><strong>Show Time</strong></h1>
+
+    <div class="post-tag-line">
+            <span class="label label-primary">UI</span>
+            <span class="label label-primary">Design</span>
+            <span class="label label-primary">Visualization</span>
+    </div>
+
+
+<!--
+template = post
+title = Show Time
+summary = Events aren't text. They happen over time. Show Time is a quick and simple timeline creator.
+head_image = timeline_header.png
+attrib_url = 
+attrib_desc = Me
+tags = UI|Design|Visualization
+--->
+
+<h2>When Things Happen</h2>
+
+<p>I recently found myself trying to piece together the events that led up to a certain issue. At some point I realized that just keeping track of them in my head was not good enough and just typing them out left me wanting as I had to re-read and basically re-play the events to myself. Then I realized there is a better way to view events over time - a timeline. Shocking revelation right? </p>
+
+<p>A quick search to see if there was a simple tool that would let me bang together a timeline based on dates and a description led nowhere. To my shock nothing simple and usable showed up. I found Excel plugins that looked like they were created in Excel 95 and some tutorials on 15 <em>easy</em> steps to transform a scatter plot chart in Excel until it resembled a timeline. Then there were the myriad of Timeline-As-A-Service &#0153; tools that promised to make professional looking timelines but seemed to assume I had hours of time and all sorts of graphics that I wanted to add. </p>
+
+<p>Bewildered and wondering if I would ever find the brutally simple timeline creator I wanted I decided to hack it together myself. Thus Show Time was born.</p>
+
+<h2>A Simpler Time</h2>
+
+<p><img src="/static/images/blog_media/show_time_finished.png" alt="Finished Product" /></p>
+
+<p><a href="/experiment/show_time/show_time.html">Try It Out Here!</a></p>
+
+<p>My goals were pretty simple:</p>
+
+<ul>
+<li>Minimal time investment - I want a timeline not an extensible timeline creating framework</li>
+<li>Low friction - No fancy frameworks, build tools. I want this today even if I use technology from yesterday.</li>
+<li>Easy data entry - Focused on keyboard driven entry of data so I can be in and out of the tool. I don't want to spend time working with the tool I want a timeline.</li>
+<li>Simple timeline control - I don't want to re-invent timelines I just need a simple usable api for one.</li>
+<li>Web based. Preferably static - I would like to host it somewhere easily so I can get to it from anywhere.</li>
+</ul>
+
+<h3>Timeline Ahoy</h3>
+
+<p>The timeline control I went with was from <a href="http://visjs.org/">http://visjs.org/</a>. It fits the simple and just works goal I had not to mention great documentation and easy to understand demos. I dropped that on the page and set to work being able to drive data into it from the UI.</p>
+
+<h3>Keyed In</h3>
+
+<p>I originally started thinking about having an Excel-like interface to enter the timeline information. Another quick search led me to a plethora of JavaScript based Excel-like components. I tried a couple but none of them gave me the simplicity I wanted in the time I was willing to give them.</p>
+
+<p>Since my goal was minimal time investment in building this I didn't want to have to spend time learning a complex api just so I can get data into the timeline. So I declared technical bankruptcy and started with the simplest thing - a table of inputs.</p>
+
+<p>This table would let me tab and shift-tab so I could quickly navigate and create or edit events. The tab-based navigation also made it simple to determine when we have run out of room so we can add another row for more info without having to switch to the mouse. Now I can just focus on dumping the events from my head into the timeline.</p>
+
+<h3>Style Guide</h3>
+
+<p>I brought in <a href="http://milligram.io/">http://milligram.io/</a> to help make things look a bit more presentable. I also added a contenteditable h1 element for the title so you can easily give the timeline some context.</p>
+
+<h3>Land Of The Data Lost</h3>
+
+<p>The info you enter is auto-saved to localstorage. This makes it less frustrating if you accidentally hit refresh or your browser crashes. It's so basic it's borderline crude but it comes in handy.</p>
+
+<h2>What's Next</h2>
+
+<p>Now I get to try and enjoy using it. Hopefully it will come in handy when I try to piece together disparate events in the future. It should also make it easier to communicate what I found with other people.</p>
+
+<p>From a technical side the code is like any good prototype - ready to fall over at the mention of a new requirement. If I wanted to make this thing last I would refactor it until it could withstand more than the happy path on the latest browser but first I want to make sure this thing is even valuable. It doesn't make sense building it to last millennia when I'm not sure it will last this afternoon.</p>
+
+<p>No matter what the future holds I learned some things and had fun with it. Feel free to play with it and let me know how it could be better. </p>
+
+<p>Here's to many happy time(line)s ;-)</p>
+
+
+<br/><hr />
+<div id="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function() {
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+     
+	</div>
+			
+    <!-- FOOTER -->
+<div class="container">
+    <footer>
+        <p style="text-align:center;">Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way.</p>
+        <p class="pull-left">&copy; 2017 Frank Meola</p>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+    </footer>
+</div>
+    
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/static/javascripts/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-48719044-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	
+	<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'frank-meola'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    <script>
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+           var msViewportStyle = document.createElement('style')
+           msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'))
+           document.querySelector('head').appendChild(msViewportStyle)
+        }
+    </script>
+
+
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+  </body>
+</html>
